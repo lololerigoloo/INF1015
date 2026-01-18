@@ -1,0 +1,9 @@
+pain 100
+pomme_de_terre 300
+sucre 280
+Riz 850
+Bananes 75
+Farine 45
+Huile 25
+Mayonnaise 30
+Fromage 200
