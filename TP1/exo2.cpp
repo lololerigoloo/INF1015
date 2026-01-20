@@ -1,11 +1,9 @@
 // Bonjour ce code est le numéro 2 le but est de faire un chiffrement de César
 #include <iostream>
 #include <string>
-#include <cstdlib>
 using namespace std;
 string caeserCipher(string phrase, int decalage)
 {
-
     for (int i = 0; i < phrase.length(); i++)
     {
         if (isalpha(phrase[i]))
@@ -47,20 +45,16 @@ int main()
         }
         else
         {
-            // Debut Extra pris sur https://stackoverflow.com/questions/6486289/clear-console-screen-in-c
-            #ifdef _WIN32
-                std::system("cls");
-            #else
-             // Assume POSIX or other non-Windows
-                 std::system("clear");
-            #endif
+// Debut Extra pris sur https://stackoverflow.com/questions/6486289/clear-console-screen-in-c
+#ifdef _WIN32
+            std::system("cls");
+#else
+            // Assume POSIX or other non-Windows
+            std::system("clear");
+#endif
             // Fin Extra pris sur https://stackoverflow.com/questions/6486289/clear-console-screen-in-c
             cout << "Décalage invalide. Veuillez entrer un nombre entre 1 et 17." << endl;
         }
     }
-    
-    
-    
-    
-    
+    return 0;
 }
