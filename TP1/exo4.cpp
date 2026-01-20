@@ -1,4 +1,12 @@
-// Bonjour ce code est le numéro 4 le but est de faire est de trouver un nombre n de place libre dans un tableau 2d
+/*
+    INF1015 - Programmation I
+    TP1 - Exercices 1 à 5
+    Auteur: Laurent Corbeil et Tristan Gagné
+    Date: 2026-01-20
+    Description: Bonjour ce code est le numéro 4 le but 
+    de trouver un nombre n de place libre dans un tableau 2d   
+
+*/
 #include <iostream>
 #include <random>
 

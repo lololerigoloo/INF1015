@@ -1,3 +1,11 @@
+/*
+    INF1015 - Programmation I
+    TP1 - Exercices 1 à 5
+    Auteur: Laurent Corbeil et Tristan Gagné
+    Date: 2026-01-20
+    Description: Programme principal qui exécute les exercices 1 à 5 pour le TP1 de inf1015 hiver 2026.
+*/
+
 #include <iostream>
 #include <fstream>
 #include <string>

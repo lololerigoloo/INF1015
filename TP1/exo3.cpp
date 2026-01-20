@@ -1,5 +1,12 @@
-// Bonjour ce code est le numéro 3 le but est de lire un fichier texte
-// et d'en afficher la valeur maximum et minimum
+/*
+    INF1015 - Programmation I
+    TP1 - Exercices 1 à 5
+    Auteur: Laurent Corbeil et Tristan Gagné
+    Date: 2026-01-20
+    Description: Bonjour ce code est le numéro 3 le but est de lire un fichier texte 
+    et d'en afficher la valeur maximum et minimum
+*/
+
 #include <iostream>
 #include <vector>
 #include <string>

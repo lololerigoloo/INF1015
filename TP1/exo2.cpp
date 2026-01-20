@@ -1,4 +1,10 @@
-// Bonjour ce code est le numéro 2 le but est de faire un chiffrement de César
+/* 
+    INF1015 - Programmation I
+    TP1 - Exercices 1 à 5
+    Auteur: Laurent Corbeil et Tristan Gagné
+    Date: 2026-01-20
+    Description :Bonjour ce code est le numéro 2 le but est de faire un chiffrement de César 
+    en ne modifiant que les lettres de l'alphabet et en remplaçant les autres caractères par '&' */
 #include <iostream>
 #include <string>
 using namespace std;

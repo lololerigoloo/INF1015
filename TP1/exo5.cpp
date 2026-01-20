@@ -1,3 +1,13 @@
+/*
+    INF1015 - Programmation I
+    TP1 - Exercices 1 à 5
+    Auteur: Laurent Corbeil et Tristan Gagné
+    Date: 2026-01-20
+    Description: Bonjour ce code est le numéro 5 le but est de lire un fichier 
+    contenant des informations sur des étudiants et de compter le nombre d'étudiants 
+    dans différents domaines d'étude en fonction d'une plage de matricules donnée.
+*/
+
 #include <string>
 #include <iostream>
 #include <fstream>
