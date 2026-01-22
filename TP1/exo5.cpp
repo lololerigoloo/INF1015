@@ -20,7 +20,7 @@ struct Etudiant
     string sigle;
 };
 
-void RemplirEtudiant(Etudiant etudiant[], ifstream &fichier, int &nbrelem)
+void remplirEtudiant(Etudiant etudiant[], ifstream &fichier, int &nbrelem)
 {
     while (fichier >> etudiant[nbrelem].matricule >> etudiant[nbrelem].sigle)
     {
@@ -28,7 +28,7 @@ void RemplirEtudiant(Etudiant etudiant[], ifstream &fichier, int &nbrelem)
     }
     fichier.close();
 }
-void CompterDomaine(Etudiant etudiant[], int nbrelem, int min, int max, const string domaine[], int compteur[])
+void compterDomaine(Etudiant etudiant[], int nbrelem, int min, int max, const string domaine[], int compteur[])
 {
     for (int i = 0; i < nbrelem; i++)
     {
@@ -49,7 +49,7 @@ void CompterDomaine(Etudiant etudiant[], int nbrelem, int min, int max, const st
         }
     }
 }
-void AfficherResultat(int compteurDomaine[], const string domaine[])
+void afficherResultat(int compteurDomaine[], const string domaine[])
 {
     for (int j = 0; j < 5; j++)
     {
@@ -73,7 +73,7 @@ int main()
     }
     Etudiant etudiants[400];
     int nbrelem = 0;
-    RemplirEtudiant(etudiants, fichier, nbrelem);
+    remplirEtudiant(etudiants, fichier, nbrelem);
     while (true)
     {
         int min = 0;
@@ -91,8 +91,8 @@ int main()
         }
         cout << "Dans cette plage, il y a ces nombres d'etudiants dans chaque domaine: " << endl;
         int compteurDomaine[5] = {0};
-        CompterDomaine(etudiants, nbrelem, min, max, domaine, compteurDomaine);
-        AfficherResultat(compteurDomaine, domaine);
+        compterDomaine(etudiants, nbrelem, min, max, domaine, compteurDomaine);
+        afficherResultat(compteurDomaine, domaine);
     }
     return 0;
 }

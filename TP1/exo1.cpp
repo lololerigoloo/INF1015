@@ -1,4 +1,10 @@
-// Bonjour ce code est le numéro 1 le but est de faire un trinagle isocèle d'étoiles
+/*
+    INF1015 - Programmation I
+    TP1 - Exercices 1 à 5
+    Auteur: Laurent Corbeil et Tristan Gagné
+    Date: 2026-01-20
+    Description: Bonjour ce code est le numéro 1 le but est de faire un trinagle isocèle d'étoiles
+*/
 #include <iostream>
 using namespace std;
 

@@ -8,11 +8,10 @@
 */
 
 #include <iostream>
-#include <vector>
 #include <string>
 #include <fstream>
 using namespace std;
-double Max(double valeurs[], int nbrelem)
+double max(double valeurs[], int nbrelem)
 {
     for (int i = 1; i < nbrelem; i++)
     {
@@ -23,7 +22,7 @@ double Max(double valeurs[], int nbrelem)
     }
     return valeurs[0];
 }
-double Min(double valeurs[], int nbrelem)
+double min(double valeurs[], int nbrelem)
 {
     for (int i = 1; i < nbrelem; i++)
     {
@@ -34,7 +33,7 @@ double Min(double valeurs[], int nbrelem)
     }
     return valeurs[0];
 }
-int NombreElements(ifstream &fichier)
+int nombreElements(ifstream &fichier)
 {
     string ligne;
     int compteur = 0;
@@ -45,18 +44,16 @@ int NombreElements(ifstream &fichier)
     cout << "Nombre d'éléments: " << compteur << endl;
     return compteur;
 }
-vector<double> TransformerEnTableau(ifstream &fichier, int nbrelem)
+void transformerEnTableau(ifstream &fichier, double valeurs[])
 {
     int compteur = 0;
     string nom;
     int valeur;
-    vector<double> tableau(nbrelem);
-    while (fichier >> nom >> valeur)
+    while(fichier >> nom >> valeur)
     {
-        tableau[compteur] = valeur;
+        valeurs[compteur] = valeur;
         compteur++;
     }
-    return tableau;
 }
 
 int main()
@@ -70,20 +67,19 @@ int main()
     else
     {
         cout << "Fichier ouvert avec succès." << endl;
-        int nbrelem = NombreElements(fichier);
+        int nbrelem = nombreElements(fichier);
         fichier.clear();                 // Réinitialiser les indicateurs d'état du flux
         fichier.seekg(0, ios::beg);      // Revenir au début du fichier
-        vector<double> tableau = TransformerEnTableau(fichier, nbrelem);
         double valeurs[nbrelem];
+        transformerEnTableau(fichier, valeurs);
         for (int i = 0; i < nbrelem; i++)
         {
             
-            valeurs[i] = tableau[i];
+            valeurs[i] = valeurs[i];
         }
         
-        
-        double maximum = Max(valeurs, nbrelem);
-        double minimum = Min(valeurs, nbrelem);
+        double maximum = max(valeurs, nbrelem);
+        double minimum = min(valeurs, nbrelem);
         cout << "La valeur maximum est: " << maximum << endl;
         cout << "La valeur minimum est: " << minimum << endl;
     }

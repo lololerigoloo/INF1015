@@ -14,7 +14,6 @@
 
 using namespace std;
 
-
 // Début de exo1.cpp
 void exo1()
 {
@@ -101,7 +100,7 @@ int exo2()
 // Fin de exo2.cpp
 
 // Debut de exo3.cpp
-double Max(double valeurs[], int nbrelem)
+double max(double valeurs[], int nbrelem)
 {
     for (int i = 1; i < nbrelem; i++)
     {
@@ -112,7 +111,7 @@ double Max(double valeurs[], int nbrelem)
     }
     return valeurs[0];
 }
-double Min(double valeurs[], int nbrelem)
+double min(double valeurs[], int nbrelem)
 {
     for (int i = 1; i < nbrelem; i++)
     {
@@ -123,7 +122,7 @@ double Min(double valeurs[], int nbrelem)
     }
     return valeurs[0];
 }
-int NombreElements(ifstream &fichier)
+int nombreElements(ifstream &fichier)
 {
     string ligne;
     int compteur = 0;
@@ -134,18 +133,16 @@ int NombreElements(ifstream &fichier)
     cout << "Nombre d'éléments: " << compteur << endl;
     return compteur;
 }
-vector<double> TransformerEnTableau(ifstream &fichier, int nbrelem)
+void transformerEnTableau(ifstream &fichier, double valeurs[])
 {
     int compteur = 0;
     string nom;
     int valeur;
-    vector<double> tableau(nbrelem);
     while (fichier >> nom >> valeur)
     {
-        tableau[compteur] = valeur;
+        valeurs[compteur] = valeur;
         compteur++;
     }
-    return tableau;
 }
 
 void exo3()
@@ -154,22 +151,24 @@ void exo3()
     if (!fichier)
     {
         cout << "Erreur lors de l'ouverture du fichier." << endl;
+        return;
     }
     else
     {
         cout << "Fichier ouvert avec succès." << endl;
-        int nbrelem = NombreElements(fichier);
+        int nbrelem = nombreElements(fichier);
         fichier.clear();            // Réinitialiser les indicateurs d'état du flux
         fichier.seekg(0, ios::beg); // Revenir au début du fichier
-        vector<double> tableau = TransformerEnTableau(fichier, nbrelem);
         double valeurs[nbrelem];
+        transformerEnTableau(fichier, valeurs);
         for (int i = 0; i < nbrelem; i++)
         {
 
-            valeurs[i] = tableau[i];
+            valeurs[i] = valeurs[i];
         }
-        double maximum = Max(valeurs, nbrelem);
-        double minimum = Min(valeurs, nbrelem);
+
+        double maximum = max(valeurs, nbrelem);
+        double minimum = min(valeurs, nbrelem);
         cout << "La valeur maximum est: " << maximum << endl;
         cout << "La valeur minimum est: " << minimum << endl;
     }
@@ -276,7 +275,7 @@ struct Etudiant
     string sigle;
 };
 
-void RemplirEtudiant(Etudiant etudiant[], ifstream &fichier, int &nbrelem)
+void remplirEtudiant(Etudiant etudiant[], ifstream &fichier, int &nbrelem)
 {
     while (fichier >> etudiant[nbrelem].matricule >> etudiant[nbrelem].sigle)
     {
@@ -284,7 +283,7 @@ void RemplirEtudiant(Etudiant etudiant[], ifstream &fichier, int &nbrelem)
     }
     fichier.close();
 }
-void CompterDomaine(Etudiant etudiant[], int nbrelem, int min, int max, const string domaine[], int compteur[])
+void compterDomaine(Etudiant etudiant[], int nbrelem, int min, int max, const string domaine[], int compteur[])
 {
     for (int i = 0; i < nbrelem; i++)
     {
@@ -305,7 +304,7 @@ void CompterDomaine(Etudiant etudiant[], int nbrelem, int min, int max, const st
         }
     }
 }
-void AfficherResultat(int compteurDomaine[], const string domaine[])
+void afficherResultat(int compteurDomaine[], const string domaine[])
 {
     for (int j = 0; j < 5; j++)
     {
@@ -328,7 +327,7 @@ void exo5()
     }
     Etudiant etudiants[400];
     int nbrelem = 0;
-    RemplirEtudiant(etudiants, fichier, nbrelem);
+    remplirEtudiant(etudiants, fichier, nbrelem);
     while (true)
     {
         int min = 0;
@@ -346,8 +345,8 @@ void exo5()
         }
         cout << "Dans cette plage, il y a ces nombres d'etudiants dans chaque domaine: " << endl;
         int compteurDomaine[5] = {0};
-        CompterDomaine(etudiants, nbrelem, min, max, domaine, compteurDomaine);
-        AfficherResultat(compteurDomaine, domaine);
+        compterDomaine(etudiants, nbrelem, min, max, domaine, compteurDomaine);
+        afficherResultat(compteurDomaine, domaine);
     }
 }
 // Fin de exo5.cpp
