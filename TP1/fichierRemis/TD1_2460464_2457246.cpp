@@ -4,7 +4,7 @@
     Auteur: Laurent Corbeil et Tristan Gagné
     Date: 2026-01-20
     Description: Programme principal qui exécute les exercices 1 à 5 pour le TP1 de inf1015 hiver 2026.
-    attention de mettre le 
+    attention de mettre le chemin des fichiers etudiants.txt et aliments.txt correctement
 */
 
 #include <iostream>
@@ -13,8 +13,8 @@
 #include <random>
 
 using namespace std;
-const string FICHIER_ETUDIANTS = "INF1015-TD1-H26-Fichiers/etudiants.txt"; // Chemin du fichier des étudiants a changer si besoin
-const string FICHIER_ALIMENTS = "INF1015-TD1-H26-Fichiers/aliments.txt"; // Chemin du fichier des aliments a changer si besoin
+const string FICHIER_ETUDIANTS = "../INF1015-TD1-H26-Fichiers/etudiants.txt"; // Chemin du fichier des étudiants a changer si besoin
+const string FICHIER_ALIMENTS = "../INF1015-TD1-H26-Fichiers/aliments.txt"; // Chemin du fichier des aliments a changer si besoin
 
 // Début de exercice1.cpp
 void exercice1()
@@ -85,13 +85,13 @@ int exercice2()
         }
         else
         {
-// Debut Extra pris sur https://stackoverflow.com/questions/6486289/clear-console-screen-in-c
-#ifdef _WIN32
+        // Debut Extra pris sur https://stackoverflow.com/questions/6486289/clear-console-screen-in-c
+        #ifdef _WIN32
             std::system("cls");
-#else
+        #else
             // Assume POSIX or other non-Windows
             std::system("clear");
-#endif
+        #endif
             // Fin Extra pris sur https://stackoverflow.com/questions/6486289/clear-console-screen-in-c
             cout << "Décalage invalide. Veuillez entrer un nombre entre 1 et 17." << endl;
         }
@@ -124,17 +124,6 @@ double min(double valeurs[], int nbrelem)
     }
     return valeurs[0];
 }
-int nombreElements(ifstream &fichier)
-{
-    string ligne;
-    int compteur = 0;
-    while (getline(fichier, ligne))
-    {
-        compteur++;
-    }
-    cout << "Nombre d'éléments: " << compteur << endl;
-    return compteur;
-}
 void transformerEnTableau(ifstream &fichier, double valeurs[])
 {
     int compteur = 0;
@@ -149,6 +138,7 @@ void transformerEnTableau(ifstream &fichier, double valeurs[])
 
 void exercice3()
 {
+    const int nbElements = 9;
     ifstream fichier(FICHIER_ALIMENTS);
     if (!fichier)
     {
@@ -158,19 +148,10 @@ void exercice3()
     else
     {
         cout << "Fichier ouvert avec succès." << endl;
-        int nbrelem = nombreElements(fichier);
-        fichier.clear();            // Réinitialiser les indicateurs d'état du flux
-        fichier.seekg(0, ios::beg); // Revenir au début du fichier
-        double valeurs[nbrelem];
+        double valeurs[nbElements];
         transformerEnTableau(fichier, valeurs);
-        for (int i = 0; i < nbrelem; i++)
-        {
-
-            valeurs[i] = valeurs[i];
-        }
-
-        double maximum = max(valeurs, nbrelem);
-        double minimum = min(valeurs, nbrelem);
+        double maximum = max(valeurs, nbElements);
+        double minimum = min(valeurs, nbElements);
         cout << "La valeur maximum est: " << maximum << endl;
         cout << "La valeur minimum est: " << minimum << endl;
     }
@@ -262,8 +243,6 @@ void exercice4()
         else
         {
             cout << "Demande invalide. Veuillez entrer un nombre entre 1 et " << placesParRangee << "." << endl;
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
         }
     }
 }
