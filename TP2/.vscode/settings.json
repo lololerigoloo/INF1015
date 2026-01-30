@@ -1,0 +1,17 @@
+{
+    "cmake.debugConfig": {
+        "args": [
+        ],
+        "cwd": "${workspaceFolder}"
+    },
+    "gcovViewer.highlightMissedLines": true,
+    "files.associations": {
+        "iostream": "cpp",
+        "iomanip": "cpp"
+    },
+    "C_Cpp.default.compilerPath": "/usr/bin/g++",
+    "gcovViewer.buildDirectories": [
+        "/home/laurent/ecole/inf1015/TP2/build"
+    ],
+    // "C_Cpp.loggingLevel": "Debug"
+}
