@@ -1,7 +1,7 @@
-﻿/// Verification des fuites de mémoire.
+/// Verification des fuites de mémoire.
 /// Utilise un unordered_map pour conserver toutes les allocations, ceci a évidemment un impact sur la vitesse d'exécution, donc on ne l'utilise normalement pas sur un code final mais plutôt durant la vérification d'un programme.
 /// \author Francois-R.Boyer@PolyMtl.ca
-/// \version 2024-02
+/// \version 2021-09-16
 /// \since   2020-04
 
 #include "verification_allocation.hpp"
@@ -19,8 +19,6 @@
 #include <cassert>  // Peut-être utiliser gsl Expects à la place?
 #include <limits>
 #include <string>
-#include <mutex>
-#include <shared_mutex>
 #include <cstring>
 #include <csignal>
 #include <type_traits>
@@ -32,12 +30,8 @@ using namespace std;
 #define AFFICHER_ERREUR_DELETE
 #define TERMINATE_SUR_ERREUR_DELETE
 //#define VERIFICATION_DELETE_STRICTE  // Cause une erreur si un delete est fait sans qu'il y ait un new correspondant connu.  Peut causer des problèmes si une bibliothèque a fait un new avant que le système de vérification soit actif, et fait son delete pendant que le système est actif.
-#define UTILISER_FLAGS_CRTDBG  // Nécessaire pour ne pas afficher de fuites avec GoogleTest, mais attention que s'il est actif il faut aussi activer le débogage mémoire de la bibliothèque de Microsoft, sinon aucune fuite ne sera détectée.
 
 namespace bibliotheque_cours {
-
-unique_lock<shared_mutex> get_blocs_alloues_lock();
-shared_lock<shared_mutex> get_blocs_alloues_shared_lock();
 
 bool desactive_terminate_sur_erreur_delete = false;
 
@@ -92,10 +86,7 @@ void remise_a_zero_compteurs_allocation() {
 }
 void remise_a_zero_verification() {
 	SansVerifierAllocations sva;
-	{
-		auto lock_blocs_alloues = get_blocs_alloues_lock();
-		get_blocs_alloues().clear();
-	}
+	get_blocs_alloues().clear();
 	remise_a_zero_compteurs_allocation();
 }
 
@@ -172,7 +163,7 @@ void assurer_taille_allocation_possible(size_t sz)
 
 bool debogage_allocation_est_actif()
 {
-#if defined(_MSC_VER) && defined(UTILISER_FLAGS_CRTDBG)
+#ifdef _MSC_VER
 	// GoogleTest utilise ce flag pour indiquer les allocations pour lesquelles il ne fera pas de désallocation (voir MemoryIsNotDeallocated dans gtest-port.cc).
 	auto flags_presents = _CrtSetDbgFlag(_CRTDBG_REPORT_FLAG);
 	return (flags_presents & _CRTDBG_ALLOC_MEM_DF) != 0;
@@ -233,11 +224,10 @@ void* notre_operator_new(size_t sz, bool est_tableau, const char* nom_fichier = 
 		throw std::bad_alloc();
 	ptr = pointeur_octets(ptr) + taille_verification_corruption;
 	mettre_verification_corruption_sur_allocation(ptr, sz);
-	memset(ptr, 0xCD, sz);  // Pour ne pas qu'on puisse supposer que l'allocation initialise à zéro.
+	memset(ptr, 0xCC, sz);  // Pour ne pas qu'on puisse supposer que l'allocation initialise à zéro.
 
 	if (!sva.etait_deja_actif() && debogage_allocation_est_actif()) {
 		// Attention que l'ajout aux blocs_alloues fait possiblement une allocation, et doit donc absolument être contrôlée pour ne pas faire une récursion infinie.
-		auto lock_blocs_alloues = get_blocs_alloues_lock();
 		get_blocs_alloues()[ptr] = { sz, est_tableau, nom_fichier, ligne_fichier, compte_allocations() };
 		compteur_de_new++;
 	}
@@ -245,21 +235,11 @@ void* notre_operator_new(size_t sz, bool est_tableau, const char* nom_fichier = 
 	return ptr;
 }
 
-static InfoBlocMemoire* get_info_bloc_memoire(void* ptr)
-{
-	auto lock_blocs_alloues = get_blocs_alloues_shared_lock();
-	auto& blocs = get_blocs_alloues();
-	if (auto it = blocs.find(ptr); it != blocs.end())
-		return &it->second;
-	else
-		return nullptr;
-}
-
 static void enlever_des_blocs_alloues(void* ptr, bool est_tableau) noexcept {
 	SansVerifierAllocations sva;
 	if (!sva.etait_deja_actif()) {
-		auto* info_bloc = get_info_bloc_memoire(ptr);
-		if (info_bloc == nullptr) {
+		auto it = get_blocs_alloues().find(ptr);
+		if (it == get_blocs_alloues().end()) {
 			#ifdef VERIFICATION_DELETE_STRICTE
 				return lancer_erreur_delete(SorteErreurDelete::not_allocated);
 			#else
@@ -267,23 +247,22 @@ static void enlever_des_blocs_alloues(void* ptr, bool est_tableau) noexcept {
 			#endif
 		}
 
-		if (info_bloc->est_tableau != est_tableau)
-			lancer_erreur_delete(est_tableau ? SorteErreurDelete::wrong_delete_array : SorteErreurDelete::wrong_delete_nonarray, *info_bloc);
+		if (it->second.est_tableau != est_tableau)
+			lancer_erreur_delete(est_tableau ? SorteErreurDelete::wrong_delete_array : SorteErreurDelete::wrong_delete_nonarray, it->second);
 		
-		if (!tester_verification_corruption_sur_allocation(ptr, info_bloc->taille))
-			lancer_erreur_delete(SorteErreurDelete::corruption, *info_bloc);
+		if (!tester_verification_corruption_sur_allocation(ptr, it->second.taille))
+			lancer_erreur_delete(SorteErreurDelete::corruption, it->second);
 		
-		memset(ptr, 0xDD, info_bloc->taille);  // Pour ne pas qu'on puisse relire les données désallouées.
-		{
-			auto lock_blocs_alloues = get_blocs_alloues_lock();
-			get_blocs_alloues().erase(ptr);
-		}
+		memset(ptr, 0xCC, it->second.taille);  // Pour ne pas qu'on puisse relire les données désallouées.
+		get_blocs_alloues().erase(it);
 		compteur_de_delete++;
 	}
 	else if (VerifierFuitesAllocations::est_dans_phase_apres_main()) {
 		// Dans la phase après main, il peut y avoir des désallocations pour les "static". Le delete d'un bloc vérifié doit l'enlever même s'il est hors vérification, on ne donne juste pas d'erreur.
-		if (get_blocs_alloues().erase(ptr) != 0)
+		if (auto it = get_blocs_alloues().find(ptr); it != get_blocs_alloues().end()) {
+			get_blocs_alloues().erase(it);
 			compteur_de_delete++;
+		}
 	}
 }
 
@@ -313,7 +292,6 @@ bool tous_les_new_ont_un_delete(bool seulement_avec_numeros_ligne, MarqueurVerif
 	if (!seulement_avec_numeros_ligne && depuis == depuisDebutVerificationAllocation)
 		return get_blocs_alloues().empty();
 
-	auto lock_blocs_alloues = get_blocs_alloues_shared_lock();
 	for (const auto& [ptr, info] : get_blocs_alloues()) {
 		if (info.repond_aux_criteres(seulement_avec_numeros_ligne, depuis))
 			return false;
@@ -334,12 +312,9 @@ static auto get_blocs_alloues_tries(bool seulement_avec_numeros_ligne = false, M
 	auto& blocs = get_blocs_alloues();
 	vector<decay_t<decltype(blocs)>::value_type*> resultat;
 	resultat.reserve(blocs.size());
-	{
-		auto lock_blocs_alloues = get_blocs_alloues_shared_lock();
-		for (auto& p : get_blocs_alloues())
-			if (p.second.repond_aux_criteres(seulement_avec_numeros_ligne, depuis))
-				resultat.push_back(&p);
-	}
+	for (auto& p : get_blocs_alloues())
+		if (p.second.repond_aux_criteres(seulement_avec_numeros_ligne, depuis))
+			resultat.push_back(&p);
 	sort(resultat.begin(), resultat.end(), [](auto* a, auto* b) { return a->second.numero_allocation < b->second.numero_allocation; });
 	return resultat;
 }
@@ -354,10 +329,6 @@ void dump_blocs_alloues(bool seulement_avec_numeros_ligne, MarqueurVerificationA
 }
 
 void afficher_fuites() {
-	bool echecCout = cout.fail();
-	cout.clear();
-	if (echecCout)
-		cout << endl << "Attention que cout etait en echec avant de terminer le programme, donc il peut y avoir des affichages qui ont ete perdus." << endl;
 	if (tous_les_new_ont_un_delete())
 		cout << endl << "Aucune fuite detectee." << endl;
 	else {
@@ -371,7 +342,6 @@ void afficher_fuites() {
 	}
 }
 bool tester_tous_blocs_alloues() {
-	auto lock_blocs_alloues = get_blocs_alloues_shared_lock();
 	for (const auto& [ptr, info] : get_blocs_alloues())
 		if (!tester_verification_corruption_sur_allocation(ptr, info.taille))
 			return false;
@@ -388,20 +358,6 @@ std::unordered_map<void*, InfoBlocMemoire>& get_blocs_alloues()
 	static VerifierFuitesAllocations verifierFuitesAllocations(false);
 	#endif
 	return static_blocs_alloues;
-}
-shared_mutex& get_blocs_alloues_mutex()
-{
-	static shared_mutex static_blocs_alloues_mutex;
-	return static_blocs_alloues_mutex;
-}
-// Obtient un lock_guard pour protection inter-thread de ce que retourne get_blocs_alloues().
-unique_lock<shared_mutex> get_blocs_alloues_lock()
-{
-	return unique_lock{get_blocs_alloues_mutex()};
-}
-shared_lock<shared_mutex> get_blocs_alloues_shared_lock()
-{
-	return shared_lock{get_blocs_alloues_mutex()};
 }
 
 }

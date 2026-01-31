@@ -1,13 +1,11 @@
-﻿#pragma once
+#pragma once
 /// Verification des fuites de mémoire.
 /// Utilise un unordered_map pour conserver toutes les allocations, ceci a évidemment un impact sur la vitesse d'exécution, donc on ne l'utilise normalement pas sur un code final mais plutôt durant la vérification d'un programme.
 /// \author Francois-R.Boyer@PolyMtl.ca
-/// \version 2024-01
+/// \version 2021-12-01
 /// \since   2020-04
 
 #include <unordered_map>
-#include <shared_mutex>
-#include <cstddef>
 
 #define VERIFICATION_ALLOCATION_INCLUS
 #define VERIFICATION_ALLOCATION_GLOBALE
@@ -45,9 +43,9 @@ private:
 	bool deja_actif;
 
 #ifdef VERIFICATION_ALLOCATION_GLOBALE
-	inline static thread_local bool est_actif = false;
+	inline static bool est_actif = false;
 #else
-	inline static thread_local bool est_actif = true;
+	inline static bool est_actif = true;
 #endif
 };
 
@@ -64,7 +62,6 @@ bool tester_tous_blocs_alloues();
 
 MarqueurVerificationAllocation get_marqueur_verification_allocation();
 
-std::shared_mutex& get_blocs_alloues_mutex();
 
 //void remplir_bloc_verification_corruption_a(void* ptr, size_t sz);
 //bool tester_bloc_verification_corruption_a(void* ptr);
@@ -78,7 +75,6 @@ std::shared_mutex& get_blocs_alloues_mutex();
 class VerifierFuitesAllocations {
 public:
 	VerifierFuitesAllocations(bool doitActiver = true) {
-		get_blocs_alloues_mutex();  // Pour s'assurer que la variable du mutex est créée avant, donc détruite après, la variable static pour vérifier les fuites à la fin.
 		static VerifierALaFin verifierALaFin;
 		if (doitActiver)
 			activer_verification_allocation(false);

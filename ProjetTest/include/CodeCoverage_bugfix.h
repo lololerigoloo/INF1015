@@ -1,11 +1,11 @@
-﻿#pragma once
+#pragma once
 // Bugfix pour CODE_COVERAGE_FILTER de Visual Studio; voir https://developercommunity.visualstudio.com/content/problem/189844/compilation-error-in-codecoveragecodecoverageh-wit.html qui est actuellement "Closed - Lower Priority" alors on a notre propre bugfix.
 // par Francois-R.Boyer@PolyMtl.ca
 
 #ifdef _MSC_VER
 # if __has_include(<CodeCoverage/CodeCoverage.h>)
 #  include <CodeCoverage/CodeCoverage.h>
-// Voir CODE_COVERAGE_FILTER dans le .h ci-dessus, il y a une erreur, il retourne un pointeur non const vers un littéral "...".
+// Voir CODE_COVERAGE_FILTER dans le .h ci-dessus, il y a une erreur, il retourne un pointeur non const vers un litt�ral "...".
 #  ifndef CODE_COVERAGE_DISABLE_ALL_FILTERS
 #   undef CODE_COVERAGE_FILTER
 // Copy&paste from CodeCoverage.h, only "const" has been added to the return type before CODE_COVERAGE_FILTER_NAME():
