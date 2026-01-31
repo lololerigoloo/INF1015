@@ -141,6 +141,8 @@ void enleverJeuDeListeJeux(ListeJeux &liste, Jeu *jeuAEnlever)
 	{
 		liste.elements[i] = liste.elements[i + 1];
 	}
+	liste.elements[liste.nElements - 1] = nullptr; // Optionnel: Mettre à nullptr le dernier élément
+	// Mettre à jour le nombre d'éléments
 
 	liste.nElements--;
 }
@@ -206,6 +208,10 @@ void detruireJeu(Jeu *jeu)
 		// Si le designer n'a plus de jeux, le détruire
 		if (designer->listeJeuxParticipes.nElements == 0)
 		{
+			delete[] designer->listeJeuxParticipes.elements;
+			designer->listeJeuxParticipes.elements = nullptr;
+			designer->listeJeuxParticipes.capacite = 0;
+
 			delete designer;
 			// TIP: Afficher un message lorsque le designer est détruit pour aider au débogage.
 		}
@@ -262,16 +268,25 @@ void afficherJeu(const Jeu &jeu)
 //  Votre ligne de séparation doit être différent de celle utilisée dans le main.
 void afficherListeJeux(const ListeJeux &liste)
 {
+	static const string rainbowSep =
+		"\033[31m──────────────── \033[33mW\033[32ma\033[36mz\033[34ma\033[35maa\033[31ma\033[33ma\033[32ma\033[36ma "
+		"\033[34m────────────────\033[0m\n"
+		"\033[31m──────────────── \033[33mD\033[32me\033[36mb\033[34mu\033[35mt \033[31mJ\033[33me\033[32mu\033[36mx "
+		"\033[34m────────────────\033[0m\n"
+		"\033[31m──────────────── \033[33mW\033[32ma\033[36mz\033[34ma\033[35ma\033[31ma\033[33ma\033[32ma\033[36ma "
+		"\033[34m────────────────\033[0m\n\n\n";
+	static const string ligneSeparation =
+		"\n\33[31m══════════════════ \033[37m/\033[31m|\033[37m\\/\033[31m|\033[37m\\\033[32m ═════════════════════\033[0m\n"
+		"\033[31m══════════════════ \033[37m(\033[31m.\033[37m)\033[37m(\033[31m.\033[37m)\033[32m ═════════════════════\033[0m\n"
+		"\033[31m══════════════════ \033[37m\\\033[31mFIN*\033[37m/\033[32m ═════════════════════\033[0m\n\n";
+
+	;
 	for (unsigned i = 0; i < liste.nElements; ++i)
 	{
-		afficherJeu(*liste.elements[i]);
-		static const string rainbowSep =
-			"\033[31m──────────────── "
-			"\033[33mW\033[32ma\033[36mz\033[34ma\033[35ma\033[31ma\033[33ma\033[32ma\033[36ma "
-			"\033[34m────────────────\033[0m\n";
-
 		cout << rainbowSep;
-
+		afficherJeu(*liste.elements[i]);
+		cout << ligneSeparation;
+		cout << endl;
 		// cout << "\n\033[34m-------------------(.)(.)---------------------\033[0m\n"
 	}
 }
