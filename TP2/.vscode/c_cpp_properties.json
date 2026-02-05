@@ -10,7 +10,8 @@
         "${workspaceFolder}/include",
         "${workspaceFolder}/include/cppitertools",
         "/usr/include",
-        "/usr/include/c++/*"
+        "/usr/include/c++/*",
+        "~/ecole/inf1015/TP2/include/cppitertools"
       ]
     }
   ],
