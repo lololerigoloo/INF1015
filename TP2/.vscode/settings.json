@@ -13,5 +13,5 @@
     "gcovViewer.buildDirectories": [
         "/home/laurent/ecole/inf1015/TP2/build"
     ],
-    // "C_Cpp.loggingLevel": "Debug"
+    "C_Cpp.loggingLevel": "Debug"
 }

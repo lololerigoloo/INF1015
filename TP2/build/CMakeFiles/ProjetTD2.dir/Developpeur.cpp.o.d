@@ -1,7 +1,8 @@
-CMakeFiles/ProjetTD2.dir/main.cpp.o: \
- /home/laurent/ecole/inf1015/TP2/main.cpp /usr/include/stdc-predef.h \
- /home/laurent/ecole/inf1015/TP2/Jeu.hpp /usr/include/c++/13/string \
- /usr/include/c++/13/bits/requires_hosted.h \
+CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o: \
+ /home/laurent/ecole/inf1015/TP2/Developpeur.cpp \
+ /usr/include/stdc-predef.h \
+ /home/laurent/ecole/inf1015/TP2/Developpeur.hpp \
+ /usr/include/c++/13/string /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -120,9 +121,8 @@ CMakeFiles/ProjetTD2.dir/main.cpp.o: \
  /usr/include/c++/13/bits/memory_resource.h /usr/include/c++/13/cstddef \
  /usr/include/c++/13/bits/uses_allocator.h \
  /usr/include/c++/13/bits/uses_allocator_args.h /usr/include/c++/13/tuple \
- /usr/include/c++/13/bits/ranges_util.h \
- /home/laurent/ecole/inf1015/TP2/ListeDesigners.hpp \
- /home/laurent/ecole/inf1015/TP2/Designer.hpp \
+ /usr/include/c++/13/bits/ranges_util.h /usr/include/c++/13/utility \
+ /usr/include/c++/13/bits/stl_relops.h \
  /home/laurent/ecole/inf1015/TP2/ListeJeux.hpp \
  /usr/include/c++/13/iostream /usr/include/c++/13/ostream \
  /usr/include/c++/13/ios /usr/include/c++/13/exception \
@@ -160,40 +160,7 @@ CMakeFiles/ProjetTD2.dir/main.cpp.o: \
  /usr/include/c++/13/bits/locale_facets.tcc \
  /usr/include/c++/13/bits/basic_ios.tcc \
  /usr/include/c++/13/bits/ostream.tcc /usr/include/c++/13/istream \
- /usr/include/c++/13/bits/istream.tcc /usr/include/c++/13/fstream \
- /usr/include/c++/13/bits/codecvt.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/13/bits/c++io.h \
- /usr/include/c++/13/bits/fstream.tcc /usr/include/c++/13/span \
- /usr/include/c++/13/array \
- /home/laurent/ecole/inf1015/TP2/include/cppitertools/range.hpp \
- /home/laurent/ecole/inf1015/TP2/include/cppitertools/internal/iterbase.hpp \
- /usr/include/c++/13/functional /usr/include/c++/13/bits/std_function.h \
- /usr/include/c++/13/unordered_map \
- /usr/include/c++/13/bits/unordered_map.h \
- /usr/include/c++/13/bits/hashtable.h \
- /usr/include/c++/13/bits/hashtable_policy.h \
- /usr/include/c++/13/ext/aligned_buffer.h \
- /usr/include/c++/13/bits/enable_special_members.h \
- /usr/include/c++/13/bits/node_handle.h \
- /usr/include/c++/13/bits/erase_if.h /usr/include/c++/13/vector \
- /usr/include/c++/13/bits/stl_uninitialized.h \
- /usr/include/c++/13/bits/stl_vector.h \
- /usr/include/c++/13/bits/stl_bvector.h \
- /usr/include/c++/13/bits/vector.tcc /usr/include/c++/13/bits/stl_algo.h \
- /usr/include/c++/13/bits/algorithmfwd.h \
- /usr/include/c++/13/bits/stl_heap.h \
- /usr/include/c++/13/bits/uniform_int_dist.h \
- /usr/include/c++/13/bits/stl_tempbuf.h /usr/include/c++/13/iterator \
- /usr/include/c++/13/bits/stream_iterator.h /usr/include/c++/13/optional \
- /usr/include/c++/13/utility /usr/include/c++/13/bits/stl_relops.h \
- /usr/include/c++/13/cassert /usr/include/assert.h \
- /home/laurent/ecole/inf1015/TP2/include/bibliotheque_cours.hpp \
- /home/laurent/ecole/inf1015/TP2/include/verification_allocation.hpp \
- /home/laurent/ecole/inf1015/TP2/include/debogage_memoire.hpp \
- /usr/include/c++/13/cstdint \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdint.h /usr/include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-least.h \
- /home/laurent/ecole/inf1015/TP2/ListeDeveloppeurs.hpp \
- /home/laurent/ecole/inf1015/TP2/Developpeur.hpp
+ /usr/include/c++/13/bits/istream.tcc \
+ /home/laurent/ecole/inf1015/TP2/Jeu.hpp \
+ /home/laurent/ecole/inf1015/TP2/ListeDesigners.hpp \
+ /home/laurent/ecole/inf1015/TP2/Designer.hpp

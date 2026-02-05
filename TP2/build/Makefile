@@ -142,6 +142,54 @@ ProjetTD2_couverture/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProjetTD2_couverture.dir/build.make CMakeFiles/ProjetTD2_couverture.dir/build
 .PHONY : ProjetTD2_couverture/fast
 
+Developpeur.o: Developpeur.cpp.o
+.PHONY : Developpeur.o
+
+# target to build an object file
+Developpeur.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProjetTD2.dir/build.make CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o
+.PHONY : Developpeur.cpp.o
+
+Developpeur.i: Developpeur.cpp.i
+.PHONY : Developpeur.i
+
+# target to preprocess a source file
+Developpeur.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProjetTD2.dir/build.make CMakeFiles/ProjetTD2.dir/Developpeur.cpp.i
+.PHONY : Developpeur.cpp.i
+
+Developpeur.s: Developpeur.cpp.s
+.PHONY : Developpeur.s
+
+# target to generate assembly for a file
+Developpeur.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProjetTD2.dir/build.make CMakeFiles/ProjetTD2.dir/Developpeur.cpp.s
+.PHONY : Developpeur.cpp.s
+
+ListeDeveloppeurs.o: ListeDeveloppeurs.cpp.o
+.PHONY : ListeDeveloppeurs.o
+
+# target to build an object file
+ListeDeveloppeurs.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProjetTD2.dir/build.make CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.o
+.PHONY : ListeDeveloppeurs.cpp.o
+
+ListeDeveloppeurs.i: ListeDeveloppeurs.cpp.i
+.PHONY : ListeDeveloppeurs.i
+
+# target to preprocess a source file
+ListeDeveloppeurs.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProjetTD2.dir/build.make CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.i
+.PHONY : ListeDeveloppeurs.cpp.i
+
+ListeDeveloppeurs.s: ListeDeveloppeurs.cpp.s
+.PHONY : ListeDeveloppeurs.s
+
+# target to generate assembly for a file
+ListeDeveloppeurs.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/ProjetTD2.dir/build.make CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.s
+.PHONY : ListeDeveloppeurs.cpp.s
+
 bibliotheque_cours/bibliotheque_cours.o: bibliotheque_cours/bibliotheque_cours.cpp.o
 .PHONY : bibliotheque_cours/bibliotheque_cours.o
 
@@ -224,6 +272,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... ProjetTD2_couverture"
 	@echo "... ProjetTD2"
+	@echo "... Developpeur.o"
+	@echo "... Developpeur.i"
+	@echo "... Developpeur.s"
+	@echo "... ListeDeveloppeurs.o"
+	@echo "... ListeDeveloppeurs.i"
+	@echo "... ListeDeveloppeurs.s"
 	@echo "... bibliotheque_cours/bibliotheque_cours.o"
 	@echo "... bibliotheque_cours/bibliotheque_cours.i"
 	@echo "... bibliotheque_cours/bibliotheque_cours.s"

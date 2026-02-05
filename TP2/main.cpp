@@ -7,6 +7,10 @@
 #include "verification_allocation.hpp"
 #include "debogage_memoire.hpp" // Ajout des numéros de ligne des "new" dans le rapport de fuites.  Doit être après les include du système, qui peuvent utiliser des "placement new" (non supporté par notre ajout de numéros de lignes).
 #include <cstdint>
+#include <string>
+#include "ListeDeveloppeurs.hpp"
+#include "Developpeur.hpp"
+#include <utility>
 
 using namespace std;
 using namespace iter;
@@ -313,8 +317,63 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
 
 	afficherListeJeux(listeJeux); // faite TODO: Appel à votre fonction d'affichage de votre liste de jeux.
 	// faite TODO: Faire les appels à toutes vos fonctions/méthodes pour voir qu'elles fonctionnent et avoir 0% de lignes non exécutées dans le programme (aucune ligne rouge dans la couverture de code; c'est normal que les lignes de "new" et "delete" soient jaunes).  Vous avez aussi le droit d'effacer les lignes du programmes qui ne sont pas exécutée, si finalement vous pensez qu'elle ne sont pas utiles.
+	cout << "fin de la pratie 1" << endl;
+	cout << ligneSeparation << endl;
 
-	// faite TODO: Détruire tout avant de terminer le programme.  Devrait afficher "Aucune fuite detectee." a la sortie du programme; il affichera "Fuite detectee:" avec la liste des blocs, s'il manque des delete.
+	// Créer les pairs nom + liste vide
+	pair<string, ListeJeux> p1("Nintendo", ListeJeux{0, 0, nullptr});
+	pair<string, ListeJeux> p2("Ubisoft", ListeJeux{0, 0, nullptr});
+	pair<string, ListeJeux> p3("FromSoftware", ListeJeux{0, 0, nullptr});
+	pair<string, ListeJeux> p4("Valve", ListeJeux{0, 0, nullptr});
+
+	// Créer les développeurs
+	Developpeur dev1(p1);
+	Developpeur dev2(p2);
+	Developpeur dev3(p3);
+	Developpeur dev4(p4);
+
+	dev1.MettreAJourListeJeux(listeJeux);
+	dev2.MettreAJourListeJeux(listeJeux);
+	dev3.MettreAJourListeJeux(listeJeux);
+	dev4.MettreAJourListeJeux(listeJeux);
+
+	// Liste
+	ListeDeveloppeurs liste;
+
+	cout << "\n--- Test ajout ---" << endl;
+	liste.ajouterDeveloppeur(&dev1);
+	liste.ajouterDeveloppeur(&dev2);
+	liste.ajouterDeveloppeur(&dev3);
+	liste.afficher();
+
+	cout << "\n--- Test ajout doublon ---" << endl;
+	liste.ajouterDeveloppeur(&dev1); // ne doit pas s'ajouter
+	liste.afficher();
+
+	cout << "\n--- Test resize ---" << endl;
+	liste.ajouterDeveloppeur(&dev4); // force resize
+	liste.afficher();
+
+	cout << "\n--- Test retirer dev2 ---" << endl;
+	liste.retirerDeveloppeur(&dev2);
+	liste.afficher();
+
+	cout << "\n--- Test retirer inexistant ---" << endl;
+	pair<string, ListeJeux> fakePair("Fake", ListeJeux{0, 0, nullptr});
+	Developpeur fake(fakePair);
+	liste.retirerDeveloppeur(&fake);
+	liste.afficher();
+
+	cout << "\n--- Test retirer tous ---" << endl;
+	liste.retirerDeveloppeur(&dev1);
+	liste.retirerDeveloppeur(&dev3);
+	liste.retirerDeveloppeur(&dev4);
+	liste.afficher();
+
+	cout << "\nFIN TESTS" << endl;
+
 	detruireListeJeux(listeJeux);
+
+
 	delete fuite;
 }

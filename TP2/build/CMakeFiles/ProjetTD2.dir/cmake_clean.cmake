@@ -1,4 +1,8 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o"
+  "CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o.d"
+  "CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.o"
+  "CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.o.d"
   "CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.o"
   "CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.o.d"
   "CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.o"
