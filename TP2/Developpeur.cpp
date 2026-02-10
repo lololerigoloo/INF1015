@@ -24,7 +24,7 @@ string Developpeur::Nom() const
 {
     return paireNomJeux_.first;
 }
-unsigned Developpeur::NombreParticipationJeuxDansListe(const ListeJeux &liste)
+unsigned Developpeur::nombreParticipationJeuxDansListe(const ListeJeux &liste)
 {
     string nomDev = paireNomJeux_.first;
     unsigned count = 0;
@@ -38,12 +38,12 @@ unsigned Developpeur::NombreParticipationJeuxDansListe(const ListeJeux &liste)
     return count;
 }
 
-void Developpeur::MettreAJourListeJeux(const ListeJeux &nouvelleListe)
+void Developpeur::mettreAJourListeJeux(const ListeJeux &nouvelleListe)
 {
     delete[] paireNomJeux_.second.elements;
     paireNomJeux_.second.elements = nullptr;
 
-    unsigned nbjeuxDev = NombreParticipationJeuxDansListe(nouvelleListe);
+    unsigned nbjeuxDev = nombreParticipationJeuxDansListe(nouvelleListe);
     if (nbjeuxDev > 0)
         paireNomJeux_.second.elements = new Jeu *[nbjeuxDev];
     else
@@ -65,7 +65,7 @@ void Developpeur::MettreAJourListeJeux(const ListeJeux &nouvelleListe)
     }
 }
 
-void Developpeur::AfficherInfosJeux()
+void Developpeur::afficherInfosJeux()
 {
     cout << "Développeur: " << paireNomJeux_.first << endl;
     cout << "Jeux développés:" << endl;

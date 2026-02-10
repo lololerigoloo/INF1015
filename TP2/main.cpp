@@ -332,10 +332,10 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
 	Developpeur dev3(p3);
 	Developpeur dev4(p4);
 
-	dev1.MettreAJourListeJeux(listeJeux);
-	dev2.MettreAJourListeJeux(listeJeux);
-	dev3.MettreAJourListeJeux(listeJeux);
-	dev4.MettreAJourListeJeux(listeJeux);
+	dev1.mettreAJourListeJeux(listeJeux);
+	dev2.mettreAJourListeJeux(listeJeux);
+	dev3.mettreAJourListeJeux(listeJeux);
+	dev4.mettreAJourListeJeux(listeJeux);
 
 	// Liste
 	ListeDeveloppeurs liste;

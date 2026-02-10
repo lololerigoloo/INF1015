@@ -10,9 +10,9 @@ public:
 	~Developpeur();
 
 	std::string Nom() const;
-	unsigned NombreParticipationJeuxDansListe(const ListeJeux &liste);
-	void MettreAJourListeJeux(const ListeJeux &nouvelleListe);
-	void AfficherInfosJeux();
+	unsigned nombreParticipationJeuxDansListe(const ListeJeux &liste);
+	void mettreAJourListeJeux(const ListeJeux &nouvelleListe);
+	void afficherInfosJeux();
 
 private:
 	// TODO: En faire une classe qui suit les principes OO.
