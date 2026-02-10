@@ -17,7 +17,7 @@ void ListeDeveloppeurs::afficher() const
 {
     for (unsigned i = 0; i < nElements; ++i)
     {
-        (elements[i])->AfficherInfosJeux();
+        (elements[i])->afficherInfosJeux();
     }
 }
 void ListeDeveloppeurs::ajouterDeveloppeur(Developpeur* dev)

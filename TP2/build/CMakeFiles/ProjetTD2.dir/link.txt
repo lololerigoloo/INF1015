@@ -1,1 +1,0 @@
-/usr/bin/c++ --coverage CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.o CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.o CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.o CMakeFiles/ProjetTD2.dir/main.cpp.o -o ProjetTD2 
