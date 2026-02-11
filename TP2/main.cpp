@@ -40,7 +40,7 @@ string lireString(istream &fichier)
 #pragma endregion
 
 // faite TODO: Fonction qui cherche un designer par son nom dans une ListeJeux.  Devrait utiliser span.
-Designer *trouverDesignerParNom(const span<const Jeu *const> &panJeux, const Designer &nomRecherche)
+Designer* trouverDesignerParNom(const span<const Jeu *const> &spanJeux, const Designer &nomRecherche)
 {
 	/*
 	Parcours tous les jeux dans la liste de jeux.
@@ -49,7 +49,7 @@ Designer *trouverDesignerParNom(const span<const Jeu *const> &panJeux, const Des
 	Si aucun designer avec le nom recherché n'est trouvé, retourne nullptr.
 	*/
 	string nomRechercheStr = nomRecherche.nom;
-	for (const Jeu *jeu : panJeux)
+	for (const Jeu *jeu : spanJeux)
 	{
 		for (unsigned i = 0; i < jeu->designers.nElements; ++i)
 		{
@@ -64,7 +64,7 @@ Designer *trouverDesignerParNom(const span<const Jeu *const> &panJeux, const Des
 	return nullptr;
 }
 
-Designer *lireDesigner(istream &fichier)
+Designer* lireDesigner(istream &fichier)
 {
 	Designer designer = {};
 	designer.nom = lireString(fichier);
@@ -89,14 +89,14 @@ void agrandirListeJeux(ListeJeux &liste)
 	// Copier les anciens éléments dans le nouveau tableau
 	if (liste.nElements > 0)
 	{
-		for (unsigned i = 0; i < liste.nElements; ++i)
+		for( int i : range(liste.nElements))
 		{
 			nouveauxElements[i] = liste.elements[i];
 		}
 	}
 
 	// Libérer l'ancien tableau
-	for (unsigned i = 0; i < liste.nElements; ++i)
+	for (int i : range(liste.nElements))
 	{
 		liste.elements[i] = nullptr;
 	}
@@ -125,7 +125,7 @@ void enleverJeuDeListeJeux(ListeJeux &liste, Jeu *jeuAEnlever)
 {
 	// Trouver l'index du jeu à enlever
 	unsigned indexAEnlever = liste.nElements; // Initialiser à une valeur invalide
-	for (unsigned i = 0; i < liste.nElements; ++i)
+	for (int i : range(liste.nElements))
 	{
 		if (liste.elements[i] == jeuAEnlever)
 		{
@@ -141,7 +141,7 @@ void enleverJeuDeListeJeux(ListeJeux &liste, Jeu *jeuAEnlever)
 	}
 
 	// Décaler les éléments après l'index à enlever
-	for (unsigned i = indexAEnlever; i < liste.nElements - 1; ++i)
+	for (int i : range(indexAEnlever, liste.nElements - 1))
 	{
 		liste.elements[i] = liste.elements[i + 1];
 	}
@@ -151,7 +151,7 @@ void enleverJeuDeListeJeux(ListeJeux &liste, Jeu *jeuAEnlever)
 	liste.nElements--;
 }
 
-Jeu *lireJeu(istream &fichier)
+Jeu *lireJeu(istream &fichier , ListeJeux &listeJeux)
 {
 	Jeu jeu = {};
 	jeu.titre = lireString(fichier);
@@ -169,8 +169,16 @@ Jeu *lireJeu(istream &fichier)
 
 	for ([[maybe_unused]] int i : iter::range(jeu.designers.nElements))
 	{
-		Designer *designer = lireDesigner(fichier);
-
+		Designer *designertempo = lireDesigner(fichier);
+		Designer *designer = trouverDesignerParNom(span(listeJeux.elements, listeJeux.nElements), *designertempo);
+		if (designer == nullptr)
+		{
+			designer = designertempo;
+		}
+		else
+		{
+			delete designertempo; // Éviter une fuite de mémoire si le designer existe déjà
+		}
 		nouveauJeu->designers.elements[nouveauJeu->designers.nElements] = designer; // faite TODO: Ajouter le designer à la liste des designers du jeu.
 		nouveauJeu->designers.nElements++;
 		// faite TODO: Ajouter le jeu à la liste des jeux auquel a participé le designer.
@@ -192,7 +200,7 @@ ListeJeux creerListeJeux(const string &nomFichier)
 	for ([[maybe_unused]] int n : iter::range(nElements))
 	{
 
-		Jeu *jeu = lireJeu(fichier); // faite TODO: Ajouter le jeu à la ListeJeux.
+		Jeu *jeu = lireJeu(fichier ,listeJeux); // faite TODO: Ajouter le jeu à la ListeJeux.
 		// TIP: Afficher un message lorsque l'ajout du jeu à la liste est fait pour aider au débogage.
 		ajouterJeuAListeJeux(listeJeux, jeu);
 	}
@@ -204,7 +212,7 @@ ListeJeux creerListeJeux(const string &nomFichier)
 void detruireJeu(Jeu *jeu)
 {
 	// Détruire tous les designers associés au jeu
-	for (unsigned i = 0; i < jeu->designers.nElements; ++i)
+	for (int i : range(jeu->designers.nElements))
 	{
 		Designer *designer = jeu->designers.elements[i];
 		// Enlever ce jeu de la liste des jeux du designer
@@ -230,7 +238,7 @@ void detruireJeu(Jeu *jeu)
 // faite TODO: Fonction pour détruire une ListeJeux et tous ses jeux.
 void detruireListeJeux(ListeJeux &liste)
 {
-	for (unsigned i = 0; i < liste.nElements; ++i)
+	for (int i : range(liste.nElements))
 	{
 		detruireJeu(liste.elements[i]);
 	}
@@ -373,7 +381,6 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
 	cout << "\nFIN TESTS" << endl;
 
 	detruireListeJeux(listeJeux);
-
 
 	delete fuite;
 }
