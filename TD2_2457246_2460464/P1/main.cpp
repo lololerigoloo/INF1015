@@ -329,8 +329,6 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
 	cout << "fin de la pratie 1" << endl;
 	cout << ligneSeparation << endl;
 
-
-	// ici nous faisons la partie 2 du tp
 	// Créer les pairs nom + liste vide
 	pair<string, ListeJeux> p1("Nintendo", ListeJeux{0, 0, nullptr});
 	pair<string, ListeJeux> p2("Ubisoft", ListeJeux{0, 0, nullptr});
