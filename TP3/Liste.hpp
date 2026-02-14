@@ -1,23 +1,105 @@
 ﻿#pragma once
+#include <memory>
+#include <functional>
+#include <stdexcept>
 
-//TODO: Rentdre la liste générique.
+template <class T>
 class Liste
 {
 public:
-	//TODO: Constructeurs et surcharges d'opérateurs
+    // Constructeur
+    Liste();
 
-	//TODO: Méthode pour ajouter un élément à la liste
+    // Accès
+    T& operator[](unsigned index);
+    const T& operator[](unsigned index) const;
 
-	// Pour size, on utilise le même nom que les accesseurs de la bibliothèque standard, qui permet d'utiliser certaines fonctions de la bibliotheque sur cette classe.
-	unsigned size() const         { return nElements_; }
-	unsigned getCapacite() const  { return capacite_; }
+    // Ajout
+    void ajouter(const T& element);
+    void ajouter(const std::shared_ptr<T>& element);
 
-	//TODO: Méthode pour changer la capacité de la liste
+    // Infos
+    unsigned size() const { return nElements_; }
+    int taille() const { return nElements_; }
 
-	//TODO: Méthode pour trouver un élément selon un critère (lambda).
+    // Recherche
+    T& trouver(const std::function<bool(const T&)>& critere);
 
 private:
-	unsigned nElements_;
-	unsigned capacite_;
-	//TODO: Attribut contenant les éléments de la liste.
+    void modifierCapacite();
+
+    unsigned nElements_;
+    unsigned capacite_;
+    std::shared_ptr<T>* elements_;
 };
+
+
+template <class T>
+Liste<T>::Liste()
+{
+    nElements_ = 0;
+    capacite_ = 2;
+    elements_ = new std::shared_ptr<T>[capacite_];
+}
+
+template <class T>
+void Liste<T>::ajouter(const T& element)
+{
+    if (nElements_ == capacite_)
+        modifierCapacite();
+
+    elements_[nElements_] = std::make_shared<T>(element);
+    nElements_++;
+}
+
+template <class T>
+void Liste<T>::ajouter(const std::shared_ptr<T>& element)
+{
+    if (nElements_ == capacite_)
+        modifierCapacite();
+
+    elements_[nElements_] = element;
+    nElements_++;
+}
+
+template <class T>
+void Liste<T>::modifierCapacite()
+{
+    capacite_ *= 2;
+    std::shared_ptr<T>* nouveau = new std::shared_ptr<T>[capacite_];
+
+    for (unsigned i = 0; i < nElements_; i++)
+        nouveau[i] = elements_[i];
+
+    delete[] elements_;
+    elements_ = nouveau;
+}
+
+template <class T>
+T& Liste<T>::operator[](unsigned index)
+{
+    if (index >= nElements_)
+        throw std::out_of_range("Index hors limites");
+
+    return *elements_[index];
+}
+
+template <class T>
+const T& Liste<T>::operator[](unsigned index) const
+{
+    if (index >= nElements_)
+        throw std::out_of_range("Index hors limites");
+
+    return *elements_[index];
+}
+
+template <class T>
+T& Liste<T>::trouver(const std::function<bool(const T&)>& critere)
+{
+    for (unsigned i = 0; i < nElements_; i++)
+    {
+        if (critere(*elements_[i]))
+            return *elements_[i];
+    }
+    throw std::runtime_error("Element non trouve");
+}

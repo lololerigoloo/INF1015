@@ -1,0 +1,23 @@
+# Ignore tous les dossiers build, peu importe où ils se trouvent
+**/build/
+
+# Fichiers binaires et objets compilés
+*.o
+*.obj
+*.exe
+*.out
+*.so
+*.a
+
+# Fichiers générés par CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# IDE / éditeur
+*.vscode/
+*.idea/
+*.user/
+*.suo
+*.swp

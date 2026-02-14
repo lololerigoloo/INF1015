@@ -19,13 +19,21 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	bibliotheque_cours::activerCouleursAnsi(); 
 	#pragma endregion
 	
-	ListeJeux listeJeux = creerListeJeux("jeux.bin");
+	Liste<Jeu> listeJeux = creerListeJeux("jeux.bin");
 	static const string ligneSeparation = "\n\033[92m"
 		"══════════════════════════════════════════════════════════════════════════"
 		"\033[0m\n";
+	
+	cout << ligneSeparation;
+	for (int i = 0; i < listeJeux.taille(); i++)
+	{
+		cout << "\033[93mJeu #" << i + 1 << ":\033[0m\n";
+		const Jeu& jeu = listeJeux[i];
+		cout << jeu << endl;
+	}
 
 	//TODO: L'affichage de listeJeux et l'écriture dans le fichier devraient fonctionner.
-
+	
 	//TODO: Compléter le main avec les tests demandés.
 	//TODO: S'assurer qu'aucune ligne de code est non couverte.
 	//NOTE: Il n'est pas nécessaire de couvrir les getters/setters simples fournis; il faut tester si vous en ajoutez ou les modifiez.

@@ -73,71 +73,71 @@ CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o: CMakeFiles/ProjetTD2.dir/flags.make
 CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o: /home/laurent/ecole/inf1015/TP2/Developpeur.cpp
 CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o: CMakeFiles/ProjetTD2.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/laurent/ecole/inf1015/TP2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o -MF CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o.d -o CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o -c /home/laurent/ecole/inf1015/TP2/Developpeur.cpp
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o -MF CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o.d -o CMakeFiles/ProjetTD2.dir/Developpeur.cpp.o -c /home/laurent/ecole/inf1015/TP2/Developpeur.cpp
 
 CMakeFiles/ProjetTD2.dir/Developpeur.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProjetTD2.dir/Developpeur.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/laurent/ecole/inf1015/TP2/Developpeur.cpp > CMakeFiles/ProjetTD2.dir/Developpeur.cpp.i
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/laurent/ecole/inf1015/TP2/Developpeur.cpp > CMakeFiles/ProjetTD2.dir/Developpeur.cpp.i
 
 CMakeFiles/ProjetTD2.dir/Developpeur.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProjetTD2.dir/Developpeur.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/laurent/ecole/inf1015/TP2/Developpeur.cpp -o CMakeFiles/ProjetTD2.dir/Developpeur.cpp.s
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/laurent/ecole/inf1015/TP2/Developpeur.cpp -o CMakeFiles/ProjetTD2.dir/Developpeur.cpp.s
 
 CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.o: CMakeFiles/ProjetTD2.dir/flags.make
 CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.o: /home/laurent/ecole/inf1015/TP2/ListeDeveloppeurs.cpp
 CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.o: CMakeFiles/ProjetTD2.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/laurent/ecole/inf1015/TP2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.o -MF CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.o.d -o CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.o -c /home/laurent/ecole/inf1015/TP2/ListeDeveloppeurs.cpp
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.o -MF CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.o.d -o CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.o -c /home/laurent/ecole/inf1015/TP2/ListeDeveloppeurs.cpp
 
 CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/laurent/ecole/inf1015/TP2/ListeDeveloppeurs.cpp > CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.i
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/laurent/ecole/inf1015/TP2/ListeDeveloppeurs.cpp > CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.i
 
 CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/laurent/ecole/inf1015/TP2/ListeDeveloppeurs.cpp -o CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.s
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/laurent/ecole/inf1015/TP2/ListeDeveloppeurs.cpp -o CMakeFiles/ProjetTD2.dir/ListeDeveloppeurs.cpp.s
 
 CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.o: CMakeFiles/ProjetTD2.dir/flags.make
 CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.o: /home/laurent/ecole/inf1015/TP2/bibliotheque_cours/bibliotheque_cours.cpp
 CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.o: CMakeFiles/ProjetTD2.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/laurent/ecole/inf1015/TP2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.o -MF CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.o.d -o CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.o -c /home/laurent/ecole/inf1015/TP2/bibliotheque_cours/bibliotheque_cours.cpp
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.o -MF CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.o.d -o CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.o -c /home/laurent/ecole/inf1015/TP2/bibliotheque_cours/bibliotheque_cours.cpp
 
 CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/laurent/ecole/inf1015/TP2/bibliotheque_cours/bibliotheque_cours.cpp > CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.i
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/laurent/ecole/inf1015/TP2/bibliotheque_cours/bibliotheque_cours.cpp > CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.i
 
 CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/laurent/ecole/inf1015/TP2/bibliotheque_cours/bibliotheque_cours.cpp -o CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.s
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/laurent/ecole/inf1015/TP2/bibliotheque_cours/bibliotheque_cours.cpp -o CMakeFiles/ProjetTD2.dir/bibliotheque_cours/bibliotheque_cours.cpp.s
 
 CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.o: CMakeFiles/ProjetTD2.dir/flags.make
 CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.o: /home/laurent/ecole/inf1015/TP2/bibliotheque_cours/verification_allocation.cpp
 CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.o: CMakeFiles/ProjetTD2.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/laurent/ecole/inf1015/TP2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.o -MF CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.o.d -o CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.o -c /home/laurent/ecole/inf1015/TP2/bibliotheque_cours/verification_allocation.cpp
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.o -MF CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.o.d -o CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.o -c /home/laurent/ecole/inf1015/TP2/bibliotheque_cours/verification_allocation.cpp
 
 CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/laurent/ecole/inf1015/TP2/bibliotheque_cours/verification_allocation.cpp > CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.i
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/laurent/ecole/inf1015/TP2/bibliotheque_cours/verification_allocation.cpp > CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.i
 
 CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/laurent/ecole/inf1015/TP2/bibliotheque_cours/verification_allocation.cpp -o CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.s
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/laurent/ecole/inf1015/TP2/bibliotheque_cours/verification_allocation.cpp -o CMakeFiles/ProjetTD2.dir/bibliotheque_cours/verification_allocation.cpp.s
 
 CMakeFiles/ProjetTD2.dir/main.cpp.o: CMakeFiles/ProjetTD2.dir/flags.make
 CMakeFiles/ProjetTD2.dir/main.cpp.o: /home/laurent/ecole/inf1015/TP2/main.cpp
 CMakeFiles/ProjetTD2.dir/main.cpp.o: CMakeFiles/ProjetTD2.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/laurent/ecole/inf1015/TP2/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ProjetTD2.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProjetTD2.dir/main.cpp.o -MF CMakeFiles/ProjetTD2.dir/main.cpp.o.d -o CMakeFiles/ProjetTD2.dir/main.cpp.o -c /home/laurent/ecole/inf1015/TP2/main.cpp
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/ProjetTD2.dir/main.cpp.o -MF CMakeFiles/ProjetTD2.dir/main.cpp.o.d -o CMakeFiles/ProjetTD2.dir/main.cpp.o -c /home/laurent/ecole/inf1015/TP2/main.cpp
 
 CMakeFiles/ProjetTD2.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/ProjetTD2.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/laurent/ecole/inf1015/TP2/main.cpp > CMakeFiles/ProjetTD2.dir/main.cpp.i
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/laurent/ecole/inf1015/TP2/main.cpp > CMakeFiles/ProjetTD2.dir/main.cpp.i
 
 CMakeFiles/ProjetTD2.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/ProjetTD2.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/laurent/ecole/inf1015/TP2/main.cpp -o CMakeFiles/ProjetTD2.dir/main.cpp.s
+	/usr/bin/avr-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/laurent/ecole/inf1015/TP2/main.cpp -o CMakeFiles/ProjetTD2.dir/main.cpp.s
 
 # Object files for target ProjetTD2
 ProjetTD2_OBJECTS = \
