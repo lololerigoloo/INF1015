@@ -5,9 +5,11 @@ class Concepteur
 {
 public:
 	//TODO: Un constructeur par défaut et un constructeur paramétré.
+	friend std::ostream& operator<<(std::ostream& os, const Concepteur& c);
 	Concepteur() = default;
 	Concepteur(std::string nom, int anneeNaissance, std::string pays)
 		: nom_(move(nom)), anneeNaissance_(anneeNaissance), pays_(move(pays)) {}
+	~Concepteur() = default;
 	const std::string& getNom() const     { return nom_; }
 	void setNom(std::string nom)          { nom_ = move(nom); }
 	int getAnneeNaissance() const         { return anneeNaissance_; }
@@ -20,3 +22,4 @@ private:
 	int anneeNaissance_;
 	std::string pays_;
 };
+

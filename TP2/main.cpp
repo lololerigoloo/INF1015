@@ -18,21 +18,17 @@ using namespace iter;
 #pragma region "Fonctions de base pour vous aider"
 typedef uint8_t UInt8;
 typedef uint16_t UInt16;
-template <typename T>
-T lire(istream &fichier)
+UInt8 lireUint8(istream &fichier)
 {
-	__is_trivially_constructible_impl<T> check; // Vérifie que T est trivially constructible, sinon il y a un problème de lecture
-	T valeur;
+	UInt8 valeur = 0;
 	fichier.read((char *)&valeur, sizeof(valeur));
 	return valeur;
 }
-UInt8 lireUint8(istream &fichier)
-{
-	return lire<UInt8>(fichier);
-}
 UInt16 lireUint16(istream &fichier)
 {
-	return lire<UInt16>(fichier);
+	UInt16 valeur = 0;
+	fichier.read((char *)&valeur, sizeof(valeur));
+	return valeur;
 }
 string lireString(istream &fichier)
 {

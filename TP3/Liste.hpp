@@ -9,30 +9,34 @@ class Liste
 public:
     // Constructeur
     Liste();
+    ~Liste(){  delete[] elements_; }
+    Liste(const Liste& autre);
+    Liste& operator=(const Liste& autre);
 
+    
     // Accès
-    T& operator[](unsigned index);
-    const T& operator[](unsigned index) const;
-
+    T &operator[](unsigned index);
+    const T &operator[](unsigned index) const;
     // Ajout
-    void ajouter(const T& element);
-    void ajouter(const std::shared_ptr<T>& element);
+    void ajouter(const T &element);
+    void ajouter(const std::shared_ptr<T> &element);
 
     // Infos
     unsigned size() const { return nElements_; }
     int taille() const { return nElements_; }
+    int capacite() const { return capacite_; }
+    std::shared_ptr<T> getShared(int i) const { return elements_[i]; }
 
     // Recherche
-    T& trouver(const std::function<bool(const T&)>& critere);
+    std::shared_ptr<T> trouver(const std::function<bool(const T &)> &critere) const;
 
 private:
     void modifierCapacite();
 
     unsigned nElements_;
     unsigned capacite_;
-    std::shared_ptr<T>* elements_;
+    std::shared_ptr<T> *elements_;
 };
-
 
 template <class T>
 Liste<T>::Liste()
@@ -41,9 +45,19 @@ Liste<T>::Liste()
     capacite_ = 2;
     elements_ = new std::shared_ptr<T>[capacite_];
 }
+template <class T>
+Liste<T>::Liste(const Liste& autre)
+{
+    nElements_ = autre.nElements_;
+    capacite_ = autre.capacite_;
+    elements_ = new std::shared_ptr<T>[capacite_];
+
+    for (unsigned i = 0; i < nElements_; i++)
+        elements_[i] = autre.elements_[i];
+}
 
 template <class T>
-void Liste<T>::ajouter(const T& element)
+void Liste<T>::ajouter(const T &element)
 {
     if (nElements_ == capacite_)
         modifierCapacite();
@@ -53,7 +67,7 @@ void Liste<T>::ajouter(const T& element)
 }
 
 template <class T>
-void Liste<T>::ajouter(const std::shared_ptr<T>& element)
+void Liste<T>::ajouter(const std::shared_ptr<T> &element)
 {
     if (nElements_ == capacite_)
         modifierCapacite();
@@ -66,7 +80,7 @@ template <class T>
 void Liste<T>::modifierCapacite()
 {
     capacite_ *= 2;
-    std::shared_ptr<T>* nouveau = new std::shared_ptr<T>[capacite_];
+    std::shared_ptr<T> *nouveau = new std::shared_ptr<T>[capacite_];
 
     for (unsigned i = 0; i < nElements_; i++)
         nouveau[i] = elements_[i];
@@ -76,7 +90,7 @@ void Liste<T>::modifierCapacite()
 }
 
 template <class T>
-T& Liste<T>::operator[](unsigned index)
+T &Liste<T>::operator[](unsigned index)
 {
     if (index >= nElements_)
         throw std::out_of_range("Index hors limites");
@@ -85,7 +99,7 @@ T& Liste<T>::operator[](unsigned index)
 }
 
 template <class T>
-const T& Liste<T>::operator[](unsigned index) const
+const T &Liste<T>::operator[](unsigned index) const
 {
     if (index >= nElements_)
         throw std::out_of_range("Index hors limites");
@@ -94,12 +108,42 @@ const T& Liste<T>::operator[](unsigned index) const
 }
 
 template <class T>
-T& Liste<T>::trouver(const std::function<bool(const T&)>& critere)
+std::shared_ptr<T> Liste<T>::trouver(const std::function<bool(const T &)> &critere) const
 {
     for (unsigned i = 0; i < nElements_; i++)
     {
         if (critere(*elements_[i]))
-            return *elements_[i];
+            return elements_[i];
     }
-    throw std::runtime_error("Element non trouve");
+    return nullptr;
+}
+
+template <class T>
+std::ostream &operator<<(std::ostream &os, const Liste<T> &liste)
+{
+    os << "Liste de " << liste.size() << " elements:\n";
+
+    for (unsigned i = 0; i < liste.size(); i++)
+    {
+        os << "  [" << i << "] " << *liste.getShared(i) << "\n";
+    }
+
+    return os;
+}
+template <class T>
+Liste<T>& Liste<T>::operator=(const Liste& autre)
+{
+    if (this == &autre)
+        return *this;
+
+    delete[] elements_;
+
+    nElements_ = autre.nElements_;
+    capacite_ = autre.capacite_;
+    elements_ = new std::shared_ptr<T>[capacite_];
+
+    for (unsigned i = 0; i < nElements_; i++)
+        elements_[i] = autre.elements_[i];
+
+    return *this;
 }

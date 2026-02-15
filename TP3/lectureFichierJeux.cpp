@@ -8,10 +8,8 @@
 #include <memory>
 #include "Concepteur.hpp"
 using namespace std;
-
 using UInt8 = uint8_t;
 using UInt16 = uint16_t;
-
 #pragma region "Fonctions de lecture de base"
 // TODO: Remplacer lireUint8 et lireUint16 par une seule fonction générique qui permet les deux, mais permettre uniquement des types qui sont is_trivially_copyable_v (un trait de type).
 template <typename T>
@@ -22,96 +20,77 @@ T lireEntier(istream &fichier)
 	fichier.read(reinterpret_cast<char *>(&valeur), sizeof(valeur));
 	return valeur;
 }
-UInt8 lireUint8(istream &fichier)
-{
-	return lireEntier<UInt8>(fichier);
-}
-
-UInt16 lireUint16(istream &fichier)
-{
-	return lireEntier<UInt16>(fichier);
-}
-
+UInt8 lireUint8(istream &fichier) { return lireEntier<UInt8>(fichier); }
+UInt16 lireUint16(istream &fichier) { return lireEntier<UInt16>(fichier); }
 string lireString(istream &fichier)
 {
+	// return lireEntier<string>(fichier); numéro de 8  
 	string texte;
 	texte.resize(lireUint16(fichier));
 	fichier.read(reinterpret_cast<char *>(&texte[0]), streamsize(sizeof(texte[0])) * texte.length());
 	return texte;
 }
 #pragma endregion
-
-const Concepteur *chercherConcepteur(const Liste<Jeu> &listeJeux, const string &nom)
+shared_ptr<Concepteur> chercherConcepteur(const Liste<Jeu> &listeJeux, const string &nom)
 {
-	for (int i = 0; i < listeJeux.taille(); i++)
-	{
-		const Jeu &jeu = listeJeux[i];
-		const Liste<Concepteur> &concepteurs = jeu.getConcepteurs();
+    for (int i = 0; i < listeJeux.taille(); i++)
+    {
+        const Jeu &jeu = listeJeux[i];
+        const Liste<Concepteur> &concepteurs = jeu.getConcepteurs();
 
-		for (int j = 0; j < concepteurs.taille(); j++)
-		{
-			const Concepteur &c = concepteurs[j];
-
-			if (c.getNom() == nom)
-				return &c;
-		}
-	}
-	return nullptr;
+        for (int j = 0; j < concepteurs.taille(); j++)
+        {
+            auto ptr = concepteurs.getShared(j);
+            if (ptr->getNom() == nom)
+                return ptr;  
+        }
+    }
+    return nullptr;
 }
-
-Concepteur *lireConcepteur(Liste<Jeu> &lj, istream &f)
+shared_ptr<Concepteur> lireConcepteur(Liste<Jeu> &lj, istream &f)
 {
 	string nom = lireString(f);
 	unsigned anneeNaissance = lireUint16(f);
 	string pays = lireString(f);
-
-	if(const_cast<Concepteur *>(chercherConcepteur(lj, nom)) == nullptr)
+	shared_ptr<Concepteur> existant = chercherConcepteur(lj, nom);
+	if (nullptr != existant)
 	{
-		Concepteur concepteur = Concepteur();
-		concepteur.setNom(nom);
-		concepteur.setAnneeNaissance(anneeNaissance);
-		concepteur.setPays(pays);
-		return new Concepteur(concepteur);
+		return existant;
 	}
 	else
 	{
-		return const_cast<Concepteur *>(chercherConcepteur(lj, nom));
+		return make_shared<Concepteur>(nom, anneeNaissance, pays);
 	}
 }
-
-Jeu *lireJeu(istream &f, Liste<Jeu> &lj)
+shared_ptr<Jeu> lireJeu(istream &f, Liste<Jeu> &lj)
 {
 	string titre = lireString(f);
 	unsigned anneeSortie = lireUint16(f);
 	string developpeur = lireString(f);
-	unsigned nConcepteurs = lireUint8(f);
-	// TODO: Compléter la fonction (équivalent de lireJeu du TD2).
+	unsigned nConcepteurs = lireUint8(f); // TODO: Compléter la fonction (équivalent de lireJeu du TD2).
 	Liste<Concepteur> listeConcepteurs = Liste<Concepteur>();
-	for (unsigned int i = 0; i < nConcepteurs; i++)
+	for (unsigned i = 0; i < nConcepteurs; i++)
 	{
-		Concepteur *concepteur = lireConcepteur(lj, f);
-		listeConcepteurs.ajouter(*concepteur);
+		std::shared_ptr<Concepteur> c = lireConcepteur(lj, f);
+		listeConcepteurs.ajouter(c);
 	}
 	Jeu jeu = Jeu();
 	jeu.setTitre(titre);
 	jeu.setAnneeSortie(anneeSortie);
 	jeu.setDeveloppeur(developpeur);
 	jeu.setConcepteurs(listeConcepteurs);
-	return new Jeu(jeu);
+	return make_shared<Jeu>(jeu);
 }
-
 Liste<Jeu> creerListeJeux(const string &nomFichier)
 {
 	ifstream f(nomFichier, ios::binary);
 	f.exceptions(ios::failbit);
-	int nElements = lireUint16(f);
-	// TODO: Compléter la fonction.
+	int nElements = lireUint16(f); // TODO: Compléter la fonction.
 	Liste<Jeu> listeJeux = Liste<Jeu>();
 	for ([[maybe_unused]] int i : iter::range(nElements))
 	{
-		Jeu *jeu = lireJeu(f, listeJeux);
+		shared_ptr<Jeu> jeu = lireJeu(f, listeJeux);
 		listeJeux.ajouter(*jeu);
 	}
-
 	return listeJeux;
 }

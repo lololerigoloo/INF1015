@@ -20,3 +20,11 @@ ostream& operator<<(ostream &os, const Jeu &jeu)
 
     return os;
 }
+
+std::shared_ptr<Concepteur> Jeu::trouverConcepteur(
+    const std::function<bool(const Concepteur&)>& critere) const
+{
+    return listeConcepteurs_.trouver(critere);
+}
+
+
