@@ -9,11 +9,9 @@ class Liste
 public:
     // Constructeur
     Liste();
-    ~Liste(){  delete[] elements_; }
-    Liste(const Liste& autre);
-    Liste& operator=(const Liste& autre);
+    Liste(const Liste &autre);
+    Liste &operator=(const Liste &autre);
 
-    
     // Accès
     T &operator[](unsigned index);
     const T &operator[](unsigned index) const;
@@ -35,7 +33,7 @@ private:
 
     unsigned nElements_;
     unsigned capacite_;
-    std::shared_ptr<T> *elements_;
+    std::unique_ptr<std::shared_ptr<T>[]> elements_;
 };
 
 template <class T>
@@ -43,14 +41,14 @@ Liste<T>::Liste()
 {
     nElements_ = 0;
     capacite_ = 2;
-    elements_ = new std::shared_ptr<T>[capacite_];
+    elements_ = std::make_unique<std::shared_ptr<T>[]>(capacite_);
 }
 template <class T>
-Liste<T>::Liste(const Liste& autre)
+Liste<T>::Liste(const Liste &autre)
 {
     nElements_ = autre.nElements_;
     capacite_ = autre.capacite_;
-    elements_ = new std::shared_ptr<T>[capacite_];
+    elements_ = std::make_unique<std::shared_ptr<T>[]>(capacite_);
 
     for (unsigned i = 0; i < nElements_; i++)
         elements_[i] = autre.elements_[i];
@@ -80,13 +78,13 @@ template <class T>
 void Liste<T>::modifierCapacite()
 {
     capacite_ *= 2;
-    std::shared_ptr<T> *nouveau = new std::shared_ptr<T>[capacite_];
+
+    auto nouveau = std::make_unique<std::shared_ptr<T>[]>(capacite_);
 
     for (unsigned i = 0; i < nElements_; i++)
         nouveau[i] = elements_[i];
 
-    delete[] elements_;
-    elements_ = nouveau;
+    elements_ = std::move(nouveau);
 }
 
 template <class T>
@@ -131,16 +129,15 @@ std::ostream &operator<<(std::ostream &os, const Liste<T> &liste)
     return os;
 }
 template <class T>
-Liste<T>& Liste<T>::operator=(const Liste& autre)
+Liste<T>& Liste<T>::operator=(const Liste<T>& autre)
 {
     if (this == &autre)
         return *this;
 
-    delete[] elements_;
-
     nElements_ = autre.nElements_;
     capacite_ = autre.capacite_;
-    elements_ = new std::shared_ptr<T>[capacite_];
+
+    elements_ = std::make_unique<std::shared_ptr<T>[]>(capacite_);
 
     for (unsigned i = 0; i < nElements_; i++)
         elements_[i] = autre.elements_[i];

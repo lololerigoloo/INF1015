@@ -87,11 +87,9 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
 		cout << "\033[93mLes deux pointeurs sont identiques\033[0m" << endl;
 	else
 		cout << "\033[93mLes deux pointeurs sont différents\033[0m" << endl;
-	
+
 	listeJeux = Liste<Jeu>();
 
-
-	
 	// TODO: L'affichage de listeJeux et l'écriture dans le fichier devraient fonctionner.
 
 	// TODO: Compléter le main avec les tests demandés.
