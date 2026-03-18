@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 # set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_MESSAGE_LOG_LEVEL VERBOSE)
 include(cmake_cours.cmake)  # Certaines fonctions de configuration de compilation pour ce cours.
 
