@@ -39,7 +39,7 @@ public:
         os << Personnage::getCouleur() << "Allies :" << "\033[0m" << std::endl;
 
         for (std::string a : getAllies())
-            os << Personnage::getCouleur() << a << "\033[0m" << std::endl;
+            os << Personnage::getCouleur() << "        " << a << "\033[0m" << std::endl;
 
         os << Personnage::getCouleur() << "Mission speciale : "
            << missionSpeciale_

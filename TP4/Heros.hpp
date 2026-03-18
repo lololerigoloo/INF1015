@@ -21,7 +21,7 @@ public:
         os << "\033[0m" << std::endl;
         os << Personnage::getCouleur() << "Allies :" << "\033[0m" << std::endl;
         for (auto &a : allies_)
-            os << Personnage::getCouleur() << a << "\033[0m" << std::endl;
+            os << Personnage::getCouleur() << "        " <<a << "\033[0m" << std::endl;
     }
 
     // void changerCouleur(int palette) override
