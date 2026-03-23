@@ -7,6 +7,7 @@
 *.exe
 *.out
 *.so
+*.pdf
 *.a
 
 # Fichiers générés par CMake

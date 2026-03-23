@@ -116,7 +116,7 @@ int main()
 	afficherListe(vilains);
 	afficherListe(personnages);
 
-	VilainHero* vh = new VilainHero(
+	VilainHero *vh = new VilainHero(
 		*vilains[0],
 		*heros[0]);
 
