@@ -246,8 +246,10 @@ int main()
 	// la raison est binary search tree (BST) qui est la structure de données utilisée pour implémenter la map, alors que la liste
 	// liée nécessite de parcourir tous les éléments jusqu'à trouver celui qu'on cherche ce qui est O(n). la raison de O(log n) pour 
 	// la map est que dans un BST équilibré, à chaque étape de la recherche, on peut éliminer la moitié des éléments restants, ce qui 
-	// conduit à une complexité logarithmique.
-	if (auto&& it = herosParNom.find("Randi"); it != herosParNom.end())
+	// conduit à une complexité logarithmique.Sinon il aurait la unordred map qui utilise un hash table et qui a une complexité moyenne de O(1) 
+	// pour la recherche, mais dans ce cas on utilise une map ordonnée. pour afficher un héros par son nom, on peut utiliser la map herosParNom
+	// qui permet d'accéder directement à l'héro sans avoir à parcourir toute la liste liée, ce qui rend l'affichage plus rapide et efficace.
+	if (auto it = herosParNom.find("Randi"); it != herosParNom.end())
 	{
 		cout << separateurSections << "Affichage de Randi à partir de la map:" << endl;
 		it->second.afficher(cout);
