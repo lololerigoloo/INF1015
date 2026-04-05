@@ -1,14 +1,17 @@
 #include <QPainter>
 #include <QMouseEvent> 
+#include <QString>
+#include <QDebug>
 #include "EchiquierWidget.hpp"
 
 namespace Vue {
 
-EchiquierWidget::EchiquierWidget(QWidget* parent)
-    : QWidget(parent), tailleCase_(80)
+EchiquierWidget::EchiquierWidget(std::shared_ptr<Modele::Echiquier> echiquier, QWidget* parent)
+    : QWidget(parent), echiquier_(std::move(echiquier)), tailleCase_(100)
 {
     // taille fixe de la fenêtre : 8 cases x 80 pixels
-    setFixedSize(N_CASES * tailleCase_, N_CASES * tailleCase_);
+    setFixedSize((N_CASES+4) * tailleCase_, N_CASES * tailleCase_);
+    
 }
 
 void EchiquierWidget::paintEvent(QPaintEvent*) {
@@ -31,13 +34,14 @@ void EchiquierWidget::paintEvent(QPaintEvent*) {
             );
         }
     }
-}
-
-void EchiquierWidget::mousePressEvent(QMouseEvent* event) {
-    // convertir la position du clic en case (colonne, rangée)
-    int colonne = event->pos().x() / tailleCase_;
-    int rangee  = event->pos().y() / tailleCase_;
-    // ici tu sauras sur quelle case le joueur a cliqué
+    //dessiner la droite de l'échiquier
+    painter.setBrush(Qt::blue);
+    painter.drawRect(
+        N_CASES * tailleCase_,  // x
+        0,                      // y
+        4 * tailleCase_,        // largeur
+        N_CASES * tailleCase_   // hauteur
+    );
 }
 
 }

@@ -2,7 +2,7 @@
 #include "Piece.hpp"
 #include "Position.hpp"
 #include <vector>
-#include "Echequier.hpp"
+#include "Echiquier.hpp"
 namespace Modele
 { 
     class Fou : public Piece 

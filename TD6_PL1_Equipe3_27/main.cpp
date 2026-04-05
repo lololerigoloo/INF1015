@@ -3,6 +3,14 @@
 #include <QWidget>
 #include <QGridLayout>
 #include "EchiquierWidget.hpp"
+#include "Fou.hpp"
+#include "Position.hpp"
+#include "Piece.hpp"
+#include "Echiquier.hpp"
+#include <iostream>
+#include <vector>
+#include <memory>
+#include "mainWinUi.hpp"
 
 #if __has_include("bibliotheque_cours.hpp")
 #include "bibliotheque_cours.hpp"
@@ -27,12 +35,6 @@ void initialiserBibliothequeCours([[maybe_unused]] int argc, [[maybe_unused]] ch
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-
-    QMainWindow fenetre;
-    Vue::EchiquierWidget *echiquier = new Vue::EchiquierWidget(&fenetre);
-    fenetre.setCentralWidget(echiquier);
-    fenetre.setWindowTitle("Échecs");
-    fenetre.show();
-
+    std::unique_ptr<Vue::MainWinUi> ui = std::make_unique<Vue::MainWinUi>();
     return app.exec();
 }

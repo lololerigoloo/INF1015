@@ -1,6 +1,6 @@
 #pragma once
 #include "Piece.hpp"
-#include "Echequier.hpp"
+#include "Echiquier.hpp"
 namespace Modele
 {
     class Pion : public Piece
