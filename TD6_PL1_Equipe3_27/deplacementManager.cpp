@@ -1,5 +1,5 @@
 #include "deplacementManager.hpp"
-
+#include "Echiquier.hpp"
 void Modele::DeplacementManager::deplacer(const Position &depart, const Position &fin)
 {
     if (!echiquier_->estPositionValide(depart) || !echiquier_->estPositionValide(fin))
@@ -31,10 +31,6 @@ void Modele::DeplacementManager::deplacer(const Position &depart, const Position
     piece->setPosition(fin); // mettre à jour la position de la pièce
 
     tour_ = (tour_ == Couleur::Blanc) ? Couleur::Noir : Couleur::Blanc;
-}
-void Modele::DeplacementManager::setPiecesSelectionnee(std::shared_ptr<Piece> piece)
-{
-    piecesSelectionnee_ = piece;
 }
 bool Modele::DeplacementManager::estEchecApresDeplacement(const Position &depart, const Position &fin)
 {
@@ -77,4 +73,3 @@ bool Modele::DeplacementManager::estEchecApresDeplacement(const Position &depart
     return enEchec;
 }
 Modele::DeplacementManager::~DeplacementManager() {}
-Modele::DeplacementManager::DeplacementManager(std::shared_ptr<Echiquier> echiquier) : echiquier_(echiquier) {}

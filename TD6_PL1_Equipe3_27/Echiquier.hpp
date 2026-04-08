@@ -25,7 +25,7 @@ namespace Modele
 
     private:
         std::vector<std::vector<std::shared_ptr<Piece>>> cases_ = std::vector<std::vector<std::shared_ptr<Piece>>>(N_CASES, std::vector<std::shared_ptr<Piece>>(N_CASES, nullptr));
-        std::unique_ptr<DeplacementManager> deplacementManager_ = std::make_unique<DeplacementManager>(std::make_shared<Echiquier>(*this));
+        std::unique_ptr<DeplacementManager> deplacementManager_;
     };
 
 }

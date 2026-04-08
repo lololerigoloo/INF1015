@@ -21,6 +21,7 @@ std::shared_ptr<Modele::Piece> Modele::Echiquier::getPiece(const Position& posit
 }
 Modele::Echiquier::Echiquier() {
     cases_ = std::vector<std::vector<std::shared_ptr<Piece>>>(N_CASES, std::vector<std::shared_ptr<Piece>>(N_CASES, nullptr));
+    deplacementManager_ = std::make_unique<DeplacementManager>(this);
 }
 Modele::Echiquier::~Echiquier() {
     // Les shared_ptr s'occupent de libérer la mémoire des pièces automatiquement, donc pas besoin de faire quoi que ce soit ici.
@@ -28,4 +29,5 @@ Modele::Echiquier::~Echiquier() {
 void Modele::Echiquier::deplacerPiece(const Position& depart, const Position& fin)
 {
    deplacementManager_->deplacer(depart, fin);
+
 }
