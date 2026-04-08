@@ -3,20 +3,29 @@
 #include "Piece.hpp"
 #include "Position.hpp"
 #include <vector>
-namespace Modele 
+#include "deplacementManager.hpp"
+namespace Modele
 {
-    class Echiquier {
+    class Echiquier
+    {
     public:
         Echiquier();
         ~Echiquier();
         void ajouterPiece(std::shared_ptr<Piece> piece);
-        std::shared_ptr<Piece> getPiece(const Position& position) const;
-        static bool estPositionValide(const Position& position) {
+        std::shared_ptr<Piece> getPiece(const Position &position) const;
+        static bool estPositionValide(const Position &position)
+        {
             return position.x() >= 0 && position.x() < N_CASES && position.y() >= 0 && position.y() < N_CASES;
         }
+        void setPiecesSelectionnee(std::shared_ptr<Piece> piece) { deplacementManager_->setPiecesSelectionnee(piece); }
+        std::vector<std::vector<std::shared_ptr<Piece>>> getCases() const { return cases_; }
+        std::shared_ptr<Piece> getPiecesSelectionnee() const { return deplacementManager_->getPiecesSelectionnee(); }
         static const int N_CASES = 8;
+        void deplacerPiece(const Position &depart, const Position &fin);
+
     private:
-        std::vector<std::vector<std::shared_ptr<Piece>>> cases_ = std::vector<std::vector<std::shared_ptr<Piece>>>(N_CASES, std::vector<std::shared_ptr<Piece>>(N_CASES, nullptr)); 
+        std::vector<std::vector<std::shared_ptr<Piece>>> cases_ = std::vector<std::vector<std::shared_ptr<Piece>>>(N_CASES, std::vector<std::shared_ptr<Piece>>(N_CASES, nullptr));
+        std::unique_ptr<DeplacementManager> deplacementManager_ = std::make_unique<DeplacementManager>(std::make_shared<Echiquier>(*this));
     };
-    
+
 }

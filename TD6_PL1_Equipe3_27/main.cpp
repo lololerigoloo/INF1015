@@ -11,6 +11,8 @@
 #include <vector>
 #include <memory>
 #include "mainWinUi.hpp"
+#include <QPixmap>
+#include <QLabel>
 
 #if __has_include("bibliotheque_cours.hpp")
 #include "bibliotheque_cours.hpp"

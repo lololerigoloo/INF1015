@@ -25,3 +25,7 @@ Modele::Echiquier::Echiquier() {
 Modele::Echiquier::~Echiquier() {
     // Les shared_ptr s'occupent de libérer la mémoire des pièces automatiquement, donc pas besoin de faire quoi que ce soit ici.
 }
+void Modele::Echiquier::deplacerPiece(const Position& depart, const Position& fin)
+{
+   deplacementManager_->deplacer(depart, fin);
+}

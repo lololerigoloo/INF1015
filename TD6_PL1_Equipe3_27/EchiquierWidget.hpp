@@ -2,6 +2,7 @@
 #include <QWidget>
 #include "Echiquier.hpp"
 #include <memory>
+#include "piecePixmapManager.hpp"
 namespace Vue
 {
 

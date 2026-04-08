@@ -3,7 +3,7 @@
 #include <QString>
 #include <QDebug>
 #include "EchiquierWidget.hpp"
-
+#include "Piece.hpp"
 namespace Vue {
 
 EchiquierWidget::EchiquierWidget(std::shared_ptr<Modele::Echiquier> echiquier, QWidget* parent)
@@ -32,8 +32,28 @@ void EchiquierWidget::paintEvent(QPaintEvent*) {
                 tailleCase_,      // largeur
                 tailleCase_       // hauteur
             );
+            auto piece = echiquier_->getPiece(Position(i, j));
+            if (piece) {
+                const QPixmap& px = Vue::PiecePixmapManager::instance().getPixmap(piece->nomImage());
+                painter.drawPixmap(j * tailleCase_, i * tailleCase_, tailleCase_, tailleCase_, px);
+            }
         }
     }
+    std::shared_ptr<Modele::Piece> piecesSelectionnee = echiquier_->getPiecesSelectionnee();
+    if (piecesSelectionnee)
+    {
+        for(const auto& pos : piecesSelectionnee->calculerDeplacementsPossibles(echiquier_->getCases()))
+        {
+            painter.setBrush(QColor(0, 255, 0, 100)); // vert transparent
+            painter.drawEllipse(
+                pos.y() * tailleCase_ + tailleCase_ / 4, // x
+                pos.x() * tailleCase_ + tailleCase_ / 4, // y
+                tailleCase_ / 2, // largeur
+                tailleCase_ / 2  // hauteur
+            );
+        }
+    }
+    
     //dessiner la droite de l'échiquier
     painter.setBrush(Qt::blue);
     painter.drawRect(
