@@ -28,3 +28,7 @@ std::vector<Position> Modele::Roi::calculerDeplacementsPossibles(const std::vect
     }
     return deplacementsPossibles_;
 }
+int Modele::Roi::nbRois_ = 0;
+Modele::Roi::~Roi() {
+    nbRois_--;
+}

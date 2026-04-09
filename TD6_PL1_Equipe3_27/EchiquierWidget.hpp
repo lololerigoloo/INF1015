@@ -12,6 +12,10 @@ namespace Vue
     public:
         EchiquierWidget(std::shared_ptr<Modele::Echiquier> echiquier, QWidget *parent = nullptr);
         int tailleCase() const { return tailleCase_; }
+        void mousePressEvent(QMouseEvent *event) override;
+        void resizeEvent(QResizeEvent *event) override;
+    signals:
+        void caseCliquee(const Position &position);
     protected:
         void paintEvent(QPaintEvent *event) override;
 

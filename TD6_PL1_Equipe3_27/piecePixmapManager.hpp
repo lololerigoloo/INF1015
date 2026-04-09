@@ -30,15 +30,15 @@ namespace Vue
 
         void chargerToutes()
         {
-            // Toutes les pièces blanches
             charger("pionBlanc", ":/images/pionBlanc.png");
             charger("fouBlanc", ":/images/fouBlanc.png");
             charger("roiBlanc", ":/images/roiBlanc.png");
+            charger("tourBlanc", ":/images/tourBlanc.png");
 
-            // Toutes les pièces noires
             charger("pionNoir", ":/images/pionNoir.png");
             charger("fouNoir", ":/images/fouNoir.png");
             charger("roiNoir", ":/images/roiNoir.png");
+            charger("tourNoir", ":/images/tourNoir.png");
         }
 
         void charger(const QString &nom, const QString &chemin)

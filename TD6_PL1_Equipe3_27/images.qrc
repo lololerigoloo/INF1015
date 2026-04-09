@@ -6,5 +6,7 @@
         <file>images/fouNoir.png</file>
         <file>images/roiBlanc.png</file>
         <file>images/fouBlanc.png</file>
+        <file>images/tourNoir.png</file>
+        <file>images/tourBlanc.png</file>
     </qresource>
 </RCC>

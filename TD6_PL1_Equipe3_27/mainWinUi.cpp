@@ -4,30 +4,43 @@
 #include "Pion.hpp"
 #include "Fou.hpp"
 #include "Roi.hpp"
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QPushButton>
 Vue::MainWinUi::MainWinUi()
 {
     echiquier_ = std::make_shared<Modele::Echiquier>();
-    echiquierWidget_ = std::make_unique<Vue::EchiquierWidget>(echiquier_, this);
-    setCentralWidget(echiquierWidget_.get());
-    setWindowTitle("Échecs1015");
-    show();
-}
 
-void Vue::MainWinUi::mousePressEvent(QMouseEvent *event)
-{
-    // convertir la position du clic en case (colonne, rangée)
-    int colonne = event->pos().x() / echiquierWidget_->tailleCase();
-    int rangee = event->pos().y() / echiquierWidget_->tailleCase();
-    if(rangee < 0 || rangee >= Modele::Echiquier::N_CASES || colonne < 0 || colonne >= Modele::Echiquier::N_CASES)
-    {
-        qDebug() << "Clic en dehors de l'échiquier";
-        return;
-    }
-    else
-    {
-        qDebug() << "Clic sur la case (" << colonne << "," << rangee << ")";
-        
-    }
-    echiquierWidget_->update(); // redessiner l'échiquier pour afficher la nouvelle pièce
-    // ici tu sauras sur quelle case le joueur a cliqué
+
+    QWidget *central = new QWidget(this);
+    QHBoxLayout *layout = new QHBoxLayout(central);
+
+
+    echiquierWidget_ = std::make_unique<Vue::EchiquierWidget>(echiquier_);
+    layout->addWidget(echiquierWidget_.get());
+    connect(echiquierWidget_.get(), &Vue::EchiquierWidget::caseCliquee,
+        this, &MainWinUi::placerPiece);
+    connect(echiquierWidget_.get(), &Vue::EchiquierWidget::caseCliquee,
+        this, &MainWinUi::actionEffacer);
+
+    QWidget *sideWidget = new QWidget(this);
+    QVBoxLayout *sideLayout = new QVBoxLayout(sideWidget);
+
+    sideWidget_ = std::make_unique<Vue::SideWidget>(sideWidget);
+    sideLayout->addWidget(sideWidget_.get());
+
+    sideWidget->setFixedWidth(200);
+    sideWidget->setStyleSheet("background-color: brown;");
+
+    layout->addWidget(sideWidget);
+
+    setCentralWidget(central);
+
+    setWindowTitle("Échecs1015");
+    resize(800, 600);
+
+    connect(sideWidget_.get(), &Vue::SideWidget::selectionChangee,
+            this, &MainWinUi::changerSelection);
+
+    show();
 }
