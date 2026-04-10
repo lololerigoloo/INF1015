@@ -9,6 +9,8 @@
 #include "Fou.hpp"
 #include "Roi.hpp"
 #include "Tour.hpp"
+#include "Reine.hpp"
+#include "Cavalier.hpp"
 #include "SideWidget.hpp"
 namespace Modele
 {

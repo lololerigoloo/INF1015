@@ -34,11 +34,15 @@ namespace Vue
             charger("fouBlanc", ":/images/fouBlanc.png");
             charger("roiBlanc", ":/images/roiBlanc.png");
             charger("tourBlanc", ":/images/tourBlanc.png");
+            charger("cavalierBlanc", ":/images/cavalierBlanc.png");
+            charger("reineBlanche", ":/images/reineBlanche.png");
 
             charger("pionNoir", ":/images/pionNoir.png");
             charger("fouNoir", ":/images/fouNoir.png");
             charger("roiNoir", ":/images/roiNoir.png");
             charger("tourNoir", ":/images/tourNoir.png");
+            charger("cavalierNoir", ":/images/cavalierNoir.png");
+            charger("reineNoire", ":/images/reineNoire.png");
         }
 
         void charger(const QString &nom, const QString &chemin)

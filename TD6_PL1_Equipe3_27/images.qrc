@@ -8,5 +8,9 @@
         <file>images/fouBlanc.png</file>
         <file>images/tourNoir.png</file>
         <file>images/tourBlanc.png</file>
+        <file>images/cavalierNoir.png</file>
+        <file>images/reineBlanche.png</file>
+        <file>images/cavalierBlanc.png</file>
+        <file>images/reineNoire.png</file>
     </qresource>
 </RCC>

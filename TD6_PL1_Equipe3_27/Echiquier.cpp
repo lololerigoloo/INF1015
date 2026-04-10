@@ -32,13 +32,19 @@ void Modele::Echiquier::ajouterPiece(Vue::TypePiece type, Couleur couleur, Posit
         case Vue::TypePiece::Tour:
             ajouterPiece(std::make_shared<Tour>(position, couleur));
             break;
+        case Vue::TypePiece::Reine:
+            ajouterPiece(std::make_shared<Reine>(position, couleur));
+            break;
+        case Vue::TypePiece::Cavalier:
+            ajouterPiece(std::make_shared<Cavalier>(position, couleur));
+            break;
         default:
             break;
         }
     }
     catch (const std::runtime_error& e)
     {
-        qDebug() << "Erreur lors de l'ajout d'un roi : " << e.what();
+        qDebug() << "Erreur lors de l'ajout d'une pièce : " << e.what();
     }
 }
     std::shared_ptr<Modele::Piece> Modele::Echiquier::getPiece(const Position &position) const
