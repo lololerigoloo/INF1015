@@ -3,13 +3,42 @@
 #include "Position.hpp"
 #include <vector>
 #include "Echiquier.hpp"
+
 namespace Modele
 {
 
     class Tour : public Piece
     {
     public:
-        Tour(Position position, Couleur couleur) : Piece(position, couleur) {}
+        ~Tour()
+        {
+            if (couleur_ == Couleur::Blanc)
+                nbToursBlanches_--;
+            else
+                nbToursNoires_--;
+        }
+        Tour(Position position, Couleur couleur) : Piece(position, couleur)
+        {
+            if (couleur == Couleur::Blanc)
+            {
+
+                nbToursBlanches_++;
+                if (nbToursBlanches_ > 2)
+                {
+                    nbToursBlanches_--;
+                    throw ExceptionNombreToursBlanches();
+                }
+            }
+            else
+            {
+                nbToursNoires_++;
+                if (nbToursNoires_ > 2)
+                {
+                    nbToursNoires_--;
+                    throw ExceptionNombreToursNoires();
+                }
+            }
+        }
 
         char symbole() const override { return 'T'; }
         std::vector<Position> calculerDeplacementsPossibles(const std::vector<std::vector<std::shared_ptr<Piece>>> &echiquier) override;
@@ -19,6 +48,8 @@ namespace Modele
 
     private:
         bool aBouge_ = false;
+        static int nbToursBlanches_; // compteur de tours existantes
+        static int nbToursNoires_;   // compteur de tours existantes
     };
 
 }

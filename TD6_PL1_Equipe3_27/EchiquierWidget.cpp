@@ -12,6 +12,7 @@ namespace Vue
     {
     }
 
+
     void Vue::EchiquierWidget::paintEvent(QPaintEvent *)
     {
         QPainter painter(this);
@@ -84,5 +85,11 @@ namespace Vue
             PiecePixmapManager::instance().setTailleCase(tailleCase_);
             update();
         }
+    }
+    void Vue::EchiquierWidget::effacerToutPiece()
+    {
+        echiquier_->reset();
+        update(); // big brain si tu update pas, les pièces ne seront pas effacées visuellement 67 on top 
+        qDebug() << "Effacer toutes les pièces";
     }
 }

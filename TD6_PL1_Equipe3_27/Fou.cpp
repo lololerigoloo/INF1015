@@ -28,3 +28,9 @@ std::vector<Position> Modele::Fou::calculerDeplacementsPossibles(const std::vect
     }
     return deplacementsPossibles_;
 }
+int Modele::Fou::nbFousBlancs_ = 0;
+int Modele::Fou::nbFousNoirs_ = 0;
+Modele::Fou::~Fou()
+{
+    couleur_ == Couleur::Blanc ? nbFousBlancs_-- : nbFousNoirs_--;
+}

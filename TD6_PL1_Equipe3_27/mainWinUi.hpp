@@ -6,6 +6,14 @@
 #include <QPixmap>
 #include <QLabel>
 #include "SideWidget.hpp"
+#include <QMouseEvent>
+#include "Piece.hpp"
+#include "Pion.hpp"
+#include "Fou.hpp"
+#include "Roi.hpp"
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QPushButton>
 namespace Vue
 {
     class MainWinUi : public QMainWindow
@@ -16,15 +24,18 @@ namespace Vue
     public slots:
         void placerPiece(const Position &position)
         {
-            if(!echiquier_->estPositionValide(position) || !sideWidget_->estActif() || sideWidget_->modeCourant() != Mode::Placer)
+            if (!echiquier_->estPositionValide(position) || !sideWidget_->estActif() || sideWidget_->modeCourant() != Mode::Placer)
                 return;
             qDebug() << "Placer pièce en" << position.x() << position.y();
+            echiquier_->ajouterPiece(pieceSelectionnee_, couleurSelectionnee_, position);
             echiquierWidget_->update();
         }
+
         void actionEffacer(const Position &position)
         {
-            if(!echiquier_->estPositionValide(position) || !sideWidget_->estActif() || sideWidget_->modeCourant() != Mode::Effacer)
+            if (!echiquier_->estPositionValide(position) || !sideWidget_->estActif() || sideWidget_->modeCourant() != Mode::Effacer)
                 return;
+            echiquier_->enleverPiece(position);
             qDebug() << "Action Effacer";
             echiquierWidget_->update();
         }
@@ -35,6 +46,15 @@ namespace Vue
             couleurSelectionnee_ = couleur;
 
             qDebug() << "Selection changée";
+        }
+        void resizeEvent(QResizeEvent *event) override
+        {
+            QMainWindow::resizeEvent(event);
+
+            int tailleCase = std::min(echiquierWidget_->width(), echiquierWidget_->height()) / Modele::Echiquier::N_CASES;
+            Vue::PiecePixmapManager::instance().setTailleCase(tailleCase);
+
+            echiquierWidget_->update();
         }
 
     private:

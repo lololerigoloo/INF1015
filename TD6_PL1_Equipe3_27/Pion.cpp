@@ -1,4 +1,29 @@
 #include "Pion.hpp"
+int Modele::Pion::nbPionsBlancs_ = 0;
+int Modele::Pion::nbPionsNoirs_ = 0;
+Modele::Pion::Pion(Position position, Couleur couleur) : Piece(position, couleur)
+{
+    if (couleur == Couleur::Blanc)
+    {
+        nbPionsBlancs_++;
+        if (nbPionsBlancs_ > 8)
+        {
+            nbPionsBlancs_--;
+            throw ExceptionNombrePionsBlancs();
+        }
+    }
+    else
+    {
+        nbPionsNoirs_++;
+        if (nbPionsNoirs_ > 8)
+        {
+            nbPionsNoirs_--;
+            throw ExceptionNombrePionsNoirs();
+        }
+    }
+}
+
+
 std::vector<Position> Modele::Pion::calculerDeplacementsPossibles(const std::vector<std::vector<std::shared_ptr<Piece>>> &echiquier)
 {
     deplacementsPossibles_.clear();

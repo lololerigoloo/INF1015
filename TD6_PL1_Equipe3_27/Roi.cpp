@@ -28,7 +28,9 @@ std::vector<Position> Modele::Roi::calculerDeplacementsPossibles(const std::vect
     }
     return deplacementsPossibles_;
 }
-int Modele::Roi::nbRois_ = 0;
-Modele::Roi::~Roi() {
-    nbRois_--;
+int Modele::Roi::nbRoisBlancs_ = 0;
+int Modele::Roi::nbRoisNoirs_ = 0;
+Modele::Roi::~Roi()
+{
+    couleur_ == Couleur::Blanc ? nbRoisBlancs_-- : nbRoisNoirs_--;
 }

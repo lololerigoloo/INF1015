@@ -131,12 +131,28 @@ namespace Vue
                 notifierActionReset(); });
             connect(effacerBtn_, &QPushButton::clicked, this, [this]()
                     { notifierActionEffacer(); });
+
+            pionBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            fouBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            roiBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            tourBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+            blancBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            noirBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+            placerBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            effacerBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+            lancerBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            resetBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
             mettreAJourButtonLabel();
         }
         bool estActif() const { return estActif_; }
         Mode modeCourant() const { return modeCourant_; }
         TypePiece pieceCourante() const { return pieceCourante_; }
         Modele::Couleur couleurCourante() const { return couleurCourante_; }
+        void resizeEvent(QResizeEvent *event) override;
         void Desactiver()
         {
             modifierStatus(false);
@@ -147,6 +163,8 @@ namespace Vue
             modifierStatus(true);
             estActif_ = true;
         }
+        TypePiece pieceSelectionnee() const { return pieceCourante_; }
+        Modele::Couleur couleurSelectionnee() const { return couleurCourante_; }
 
     signals:
         void selectionChangee(TypePiece piece, Modele::Couleur couleur);
@@ -201,6 +219,7 @@ namespace Vue
             noirBtn_->setEnabled(actif);
             effacerBtn_->setEnabled(actif);
             placerBtn_->setEnabled(actif);
+            lancerBtn_->setEnabled(actif);
         }
         QString couleurToString(Modele::Couleur c)
         {

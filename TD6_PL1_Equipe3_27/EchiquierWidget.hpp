@@ -15,7 +15,9 @@ namespace Vue
         void mousePressEvent(QMouseEvent *event) override;
         void resizeEvent(QResizeEvent *event) override;
     signals:
-        void caseCliquee(const Position &position);
+        void caseCliquee(const Position &position); 
+    public slots:
+        void effacerToutPiece();
     protected:
         void paintEvent(QPaintEvent *event) override;
 

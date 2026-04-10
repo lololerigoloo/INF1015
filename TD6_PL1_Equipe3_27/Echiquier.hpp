@@ -4,6 +4,12 @@
 #include "Position.hpp"
 #include <vector>
 #include "deplacementManager.hpp"
+#include "Piece.hpp"
+#include "Pion.hpp"
+#include "Fou.hpp"
+#include "Roi.hpp"
+#include "Tour.hpp"
+#include "SideWidget.hpp"
 namespace Modele
 {
     class Echiquier
@@ -12,11 +18,18 @@ namespace Modele
         Echiquier();
         ~Echiquier();
         void ajouterPiece(std::shared_ptr<Piece> piece);
+        void ajouterPiece(Vue::TypePiece type, Couleur couleur, Position position);
+        void enleverPiece(const Position &position)
+        {
+            if (estPositionValide(position))
+                cases_[position.x()][position.y()] = nullptr;
+        }
         std::shared_ptr<Piece> getPiece(const Position &position) const;
         static bool estPositionValide(const Position &position)
         {
             return position.x() >= 0 && position.x() < N_CASES && position.y() >= 0 && position.y() < N_CASES;
         }
+        void reset();
         void setPiecesSelectionnee(std::shared_ptr<Piece> piece) { deplacementManager_->setPiecesSelectionnee(piece); }
         std::vector<std::vector<std::shared_ptr<Piece>>> getCases() const { return cases_; }
         std::shared_ptr<Piece> getPiecesSelectionnee() const { return deplacementManager_->getPiecesSelectionnee(); }

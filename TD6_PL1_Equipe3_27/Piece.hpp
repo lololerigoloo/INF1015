@@ -2,6 +2,7 @@
 #include "Position.hpp"
 #include <vector>   
 #include <QString>
+#include "exception.hpp"
 namespace Modele 
 {
     enum class Couleur { Blanc, Noir };

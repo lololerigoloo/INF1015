@@ -35,6 +35,8 @@ std::vector<Position> Modele::Tour::calculerDeplacementsPossibles(const std::vec
     }
     return deplacementsPossibles_;
 }
+int Modele::Tour::nbToursBlanches_ = 0;
+int Modele::Tour::nbToursNoires_ = 0;
 QString Modele::Tour::nomImage() const
 {
     return (couleur_ == Couleur::Blanc) ? "tourBlanc" : "tourNoir";
