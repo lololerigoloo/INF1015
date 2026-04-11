@@ -77,9 +77,10 @@ namespace Vue
             layout->addSpacing(30);
             layout->addWidget(new QLabel("Actions"));
             resetBtn_ = new QPushButton("Reset");
-
+            lancerCompletBtn_ = new QPushButton("Vraie Partie");
             lancerBtn_ = new QPushButton("Lancer");
             layout->addWidget(lancerBtn_);
+            layout->addWidget(lancerCompletBtn_);
             layout->addWidget(resetBtn_);
 
             // --- CONNECTIONS PIECES ---
@@ -139,6 +140,11 @@ namespace Vue
                 Desactiver();
                 resetButtonStyles();
                 notifierActionLancer(); });
+            connect(lancerCompletBtn_, &QPushButton::clicked, this, [this]()
+                    {
+                Desactiver();
+                resetButtonStyles();
+                notifierActionLancerComplet(); });
 
             connect(resetBtn_, &QPushButton::clicked, this, [this]()
                     {
@@ -163,6 +169,7 @@ namespace Vue
             effacerBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
             lancerBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+            lancerCompletBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             resetBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
             mettreAJourButtonLabel();
@@ -189,6 +196,7 @@ namespace Vue
         void selectionChangee(TypePiece piece, Modele::Couleur couleur);
         void actionEffacer();
         void actionLancer();
+        void actionLancerComplet();
         void actionReset();
 
     private:
@@ -201,6 +209,7 @@ namespace Vue
         QPushButton *placerBtn_;
         QPushButton *effacerBtn_;
         QPushButton *lancerBtn_;
+        QPushButton *lancerCompletBtn_;
         QPushButton *resetBtn_;
         QPushButton *reineBtn_;
         QPushButton *cavalierBtn_;
@@ -214,7 +223,7 @@ namespace Vue
         void notifierActionEffacer() { emit actionEffacer(); }
         void notifierActionLancer() { emit actionLancer(); }
         void notifierActionReset() { emit actionReset(); }
-
+        void notifierActionLancerComplet() { emit actionLancerComplet(); }
         QString pieceToString(TypePiece piece)
         {
             switch (piece)
@@ -247,6 +256,7 @@ namespace Vue
             effacerBtn_->setEnabled(actif);
             placerBtn_->setEnabled(actif);
             lancerBtn_->setEnabled(actif);
+            lancerCompletBtn_->setEnabled(actif);
         }
         QString couleurToString(Modele::Couleur c)
         {
@@ -292,6 +302,7 @@ namespace Vue
             tourBtn_->setStyleSheet("");
             blancBtn_->setStyleSheet("");
             noirBtn_->setStyleSheet("");
+            lancerCompletBtn_->setStyleSheet("");
             selectionLabel_->setText("Tour Blanc");
             modeLabel_->setText("");
         }

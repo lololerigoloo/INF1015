@@ -10,6 +10,7 @@ namespace Vue
     EchiquierWidget::EchiquierWidget(std::shared_ptr<Modele::Echiquier> echiquier, QWidget *parent)
         : QWidget(parent), echiquier_(std::move(echiquier)), tailleCase_(100)
     {
+        connect(this, &EchiquierWidget::caseCliquee, this, &EchiquierWidget::gererCaseCliquee);
     }
 
 
@@ -86,9 +87,20 @@ namespace Vue
             update();
         }
     }
+    void Vue::EchiquierWidget::gererCaseCliquee(const Position &position)
+    {
+        if (!estPartieEnCours_)
+        {
+            qDebug() << "La partie n'est pas encore lancée. Cliquez sur 'Lancer la partie' pour commencer.";
+            return;
+        }
+        echiquier_->gererCaseCliquee(position);
+        update(); // redessiner l'échiquier pour afficher les changements
+    }
     void Vue::EchiquierWidget::effacerToutPiece()
     {
         echiquier_->reset();
+        estPartieEnCours_ = false;
         update(); // big brain si tu update pas, les pièces ne seront pas effacées visuellement 67 on top 
         qDebug() << "Effacer toutes les pièces";
     }
