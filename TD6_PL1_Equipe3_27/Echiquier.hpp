@@ -12,6 +12,7 @@
 #include "Reine.hpp"
 #include "Cavalier.hpp"
 #include "SideWidget.hpp"
+#include "blocInfomation.hpp"
 namespace Modele
 {
     class Echiquier
@@ -26,6 +27,7 @@ namespace Modele
             if (estPositionValide(position))
                 cases_[position.x()][position.y()] = nullptr;
         }
+        void placerNiveau(const QString &niveau);
         Position trouverRoi(Couleur couleur) const
         {
             for (int i = 0; i < N_CASES; i++)
@@ -55,7 +57,10 @@ namespace Modele
         static const int N_CASES = 8;
         void deplacerPiece(const Position &depart, const Position &fin);
         void placerUneVraiePartie();
-
+        Modele::BlocInformation getBlocInformation() const
+        {
+            return deplacementManager_->getBlocInformation();
+        }
     private:
         std::vector<std::vector<std::shared_ptr<Piece>>> cases_ = std::vector<std::vector<std::shared_ptr<Piece>>>(N_CASES, std::vector<std::shared_ptr<Piece>>(N_CASES, nullptr));
         std::unique_ptr<DeplacementManager> deplacementManager_;

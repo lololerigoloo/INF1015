@@ -26,6 +26,36 @@ std::vector<Position> Modele::Roi::calculerDeplacementsPossibles(const std::vect
             }
         }
     }
+    if (aBouge_ == false)
+    {
+        int ligne = position_.x();
+
+        // Roque long
+        if (echiquier[ligne][1] == nullptr && echiquier[ligne][2] == nullptr && echiquier[ligne][3] == nullptr && echiquier[ligne][0] != nullptr && echiquier[ligne][4] != nullptr && echiquier[ligne][4]->symbole() == 'R' && !static_cast<Roi *>(echiquier[ligne][4].get())->aBouge())
+        {
+            std::shared_ptr<Piece> tourGauche = echiquier[ligne][0];
+            if (tourGauche->symbole() == 'T' && !static_cast<Tour *>(tourGauche.get())->aBouge())
+            {
+                deplacementsPossibles_.emplace_back(ligne, 2);
+                peutFaireRoque_ = true;
+            }
+        }
+
+        // Roque court
+        if (echiquier[ligne][5] == nullptr && echiquier[ligne][6] == nullptr && echiquier[ligne][7] != nullptr && echiquier[ligne][4] != nullptr && echiquier[ligne][4]->symbole() == 'R' && !static_cast<Roi *>(echiquier[ligne][4].get())->aBouge())
+        {
+            std::shared_ptr<Piece> tourDroite = echiquier[ligne][7];
+            if (tourDroite->symbole() == 'T' && !static_cast<Tour *>(tourDroite.get())->aBouge())
+            {
+                deplacementsPossibles_.emplace_back(ligne, 6);
+                peutFaireRoque_ = true;
+            }
+        }
+    }
+    else
+    {
+        peutFaireRoque_ = false;
+    }
     return deplacementsPossibles_;
 }
 int Modele::Roi::nbRoisBlancs_ = 0;

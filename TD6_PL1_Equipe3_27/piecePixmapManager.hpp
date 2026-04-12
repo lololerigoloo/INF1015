@@ -43,6 +43,9 @@ namespace Vue
             charger("tourNoir", ":/images/tourNoir.png");
             charger("cavalierNoir", ":/images/cavalierNoir.png");
             charger("reineNoire", ":/images/reineNoire.png");
+
+            charger("trophee", ":/images/trophee.png");
+            charger("perdu", ":/images/perdu.png");
         }
 
         void charger(const QString &nom, const QString &chemin)

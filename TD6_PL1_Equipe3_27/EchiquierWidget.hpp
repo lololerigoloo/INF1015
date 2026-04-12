@@ -3,6 +3,8 @@
 #include "Echiquier.hpp"
 #include <memory>
 #include "piecePixmapManager.hpp"
+#include "blocInfomation.hpp"
+#include "Roi.hpp"
 namespace Vue
 {
 
@@ -16,6 +18,7 @@ namespace Vue
         void resizeEvent(QResizeEvent *event) override;
     signals:
         void caseCliquee(const Position &position);
+        void informationGenerale(const Modele::BlocInformation &info);
     public slots:
         void effacerToutPiece();
         void placerUneVraiePartie()
@@ -30,6 +33,23 @@ namespace Vue
             qDebug() << "Partie lancée";
         }
         void gererCaseCliquee(const Position &position);
+        void chargerNiveau(QString niveau);
+        void afficherEchecEtMat(const Modele::Couleur &gagnant)
+        {
+            for (const auto &ligne : echiquier_->getCases())
+            {
+                for (const auto &piece : ligne)
+                {
+                    if (piece != nullptr && piece->symbole() == 'R')
+                    {
+                        std::shared_ptr<Modele::Roi> roi = std::dynamic_pointer_cast<Modele::Roi>(piece);
+                        if (roi != nullptr)
+                            roi->changerNomRoi(roi->couleur() == gagnant);
+                    }
+                }
+            }
+            update();
+        }
 
     protected:
         void paintEvent(QPaintEvent *event) override;
@@ -42,5 +62,4 @@ namespace Vue
         bool estPartieEnCours_ = false;
         bool estTourBlanc_ = true;
     };
-
 }

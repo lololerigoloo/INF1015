@@ -14,6 +14,8 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QPushButton>
+#include "annonceWidget.hpp"
+#include "selecteurDeNiveau.hpp"
 namespace Vue
 {
     class MainWinUi : public QMainWindow
@@ -21,6 +23,7 @@ namespace Vue
         Q_OBJECT
     public:
         MainWinUi();
+
     public slots:
         void placerPiece(const Position &position)
         {
@@ -61,7 +64,11 @@ namespace Vue
         std::shared_ptr<Modele::Echiquier> echiquier_;
         std::unique_ptr<Vue::EchiquierWidget> echiquierWidget_;
         std::unique_ptr<Vue::SideWidget> sideWidget_;
+        std::unique_ptr<Vue::AnnonceWidget> annonceWidget_;
+        std::unique_ptr<Vue::SelecteurDeNiveau> selecteurNiveau_;
         Vue::TypePiece pieceSelectionnee_;
+        QTextEdit *textBox_;
+        QWidget *secondWidget_;
         Modele::Couleur couleurSelectionnee_;
     };
 }

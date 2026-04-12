@@ -13,7 +13,6 @@ namespace Vue
         connect(this, &EchiquierWidget::caseCliquee, this, &EchiquierWidget::gererCaseCliquee);
     }
 
-
     void Vue::EchiquierWidget::paintEvent(QPaintEvent *)
     {
         QPainter painter(this);
@@ -71,10 +70,11 @@ namespace Vue
         else
         {
             emit caseCliquee(Position(rangee, colonne));
+            if (estPartieEnCours_)
+                emit informationGenerale(echiquier_->getBlocInformation());
             qDebug() << "Clic sur la case (" << rangee << "," << colonne << ")";
         }
         update(); // redessiner l'échiquier pour afficher la nouvelle pièce
-        // ici tu sauras sur quelle case le joueur a cliqué
     }
     void Vue::EchiquierWidget::resizeEvent(QResizeEvent *event)
     {
@@ -101,7 +101,15 @@ namespace Vue
     {
         echiquier_->reset();
         estPartieEnCours_ = false;
-        update(); // big brain si tu update pas, les pièces ne seront pas effacées visuellement 67 on top 
+        update(); // big brain si tu update pas, les pièces ne seront pas effacées visuellement 67 on top
         qDebug() << "Effacer toutes les pièces";
+    }
+    void Vue::EchiquierWidget::chargerNiveau(QString niveau)
+    {
+        estPartieEnCours_ = true;
+        
+        echiquier_->placerNiveau(niveau);
+        emit informationGenerale(echiquier_->getBlocInformation());
+        update();
     }
 }

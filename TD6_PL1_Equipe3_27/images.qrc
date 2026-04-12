@@ -12,5 +12,7 @@
         <file>images/reineBlanche.png</file>
         <file>images/cavalierBlanc.png</file>
         <file>images/reineNoire.png</file>
+        <file>images/trophee.png</file>
+        <file>images/perdu.png</file>
     </qresource>
 </RCC>

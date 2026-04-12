@@ -161,13 +161,10 @@ namespace Vue
             tourBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             reineBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             cavalierBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
             blancBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             noirBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
             placerBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             effacerBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
             lancerBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             lancerCompletBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             resetBtn_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -198,7 +195,14 @@ namespace Vue
         void actionLancer();
         void actionLancerComplet();
         void actionReset();
-
+    public slots:
+        void doitMettreAJour(bool forcer )
+        {
+            estActif_ = forcer;
+            modifierStatus(forcer);
+            mettreAJourLabel();
+            mettreAJourButtonLabel();
+        }
     private:
         QPushButton *pionBtn_;
         QPushButton *fouBtn_;

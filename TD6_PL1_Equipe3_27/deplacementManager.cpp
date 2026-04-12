@@ -20,9 +20,49 @@ void Modele::DeplacementManager::deplacer(const Position &depart, const Position
     if (estEchecApresDeplacement(depart, fin))
         return;
 
-    echiquier_->getCases()[fin.x()][fin.y()] = piece;
-    echiquier_->getCases()[depart.x()][depart.y()] = nullptr;
-    piece->setPosition(fin);
+    bool estRoque = piece->symbole() == 'R'
+                 && static_cast<Roi *>(piece.get())->peutFaireRoque()
+                 && (fin.y() == 2 || fin.y() == 6);
+
+    if (estRoque)
+    {
+        if (fin.y() == 2) // Roque long
+        {
+            std::shared_ptr<Piece> tourGauche = echiquier_->getCases()[depart.x()][0];
+            if (tourGauche != nullptr && tourGauche->symbole() == 'T')
+            {
+                echiquier_->getCases()[depart.x()][3] = tourGauche;
+                echiquier_->getCases()[depart.x()][0] = nullptr;
+                tourGauche->setPosition(Position(depart.x(), 3));
+                static_cast<Tour *>(tourGauche.get())->setABouge(true);
+            }
+        }
+        else // Roque court
+        {
+            std::shared_ptr<Piece> tourDroite = echiquier_->getCases()[depart.x()][7];
+            if (tourDroite != nullptr && tourDroite->symbole() == 'T')
+            {
+                echiquier_->getCases()[depart.x()][5] = tourDroite;
+                echiquier_->getCases()[depart.x()][7] = nullptr;
+                tourDroite->setPosition(Position(depart.x(), 5));
+                static_cast<Tour *>(tourDroite.get())->setABouge(true);
+            }
+        }
+        echiquier_->getCases()[fin.x()][fin.y()] = piece;
+        echiquier_->getCases()[depart.x()][depart.y()] = nullptr;
+        piece->setPosition(fin);
+        static_cast<Roi *>(piece.get())->setABouge(true);
+    }
+    else
+    {
+        echiquier_->getCases()[fin.x()][fin.y()] = piece;
+        if (piece->symbole() == 'R')
+            static_cast<Roi *>(piece.get())->setABouge(true);
+        else if (piece->symbole() == 'T')
+            static_cast<Tour *>(piece.get())->setABouge(true);
+        echiquier_->getCases()[depart.x()][depart.y()] = nullptr;
+        piece->setPosition(fin);
+    }
 }
 
 bool Modele::DeplacementManager::estMouvementValide(const Position &depart, const Position &fin)
@@ -84,11 +124,11 @@ void Modele::DeplacementManager::gererCaseCliquee(const Position &position)
 
 bool Modele::DeplacementManager::estEchecApresDeplacement(const Position &depart, const Position &fin)
 {
-    std::shared_ptr<Piece> piece = echiquier_->getPiece(depart);
+    std::shared_ptr<Piece> piece         = echiquier_->getPiece(depart);
     std::shared_ptr<Piece> pieceCapturee = echiquier_->getPiece(fin);
 
     // Simuler le déplacement
-    echiquier_->getCases()[fin.x()][fin.y()] = piece;
+    echiquier_->getCases()[fin.x()][fin.y()]       = piece;
     echiquier_->getCases()[depart.x()][depart.y()] = nullptr;
     piece->setPosition(fin);
 
@@ -96,13 +136,13 @@ bool Modele::DeplacementManager::estEchecApresDeplacement(const Position &depart
 
     // Restaurer la situation initiale
     echiquier_->getCases()[depart.x()][depart.y()] = piece;
-    echiquier_->getCases()[fin.x()][fin.y()] = pieceCapturee;
+    echiquier_->getCases()[fin.x()][fin.y()]        = pieceCapturee;
     piece->setPosition(depart);
 
     return enEchec;
 }
 
-bool Modele::DeplacementManager::estEchec(const Couleur &couleur)
+bool Modele::DeplacementManager::estEchec(const Couleur &couleur) 
 {
     try
     {
@@ -132,7 +172,7 @@ bool Modele::DeplacementManager::estEchec(const Couleur &couleur)
     return false;
 }
 
-bool Modele::DeplacementManager::estEchecEtMat(const Couleur &couleur)
+bool Modele::DeplacementManager::estEchecEtMat(const Couleur &couleur) 
 {
     if (!estEchec(couleur))
         return false;
@@ -159,6 +199,40 @@ bool Modele::DeplacementManager::estEchecEtMat(const Couleur &couleur)
     catch (const std::runtime_error &e)
     {
         qDebug() << "Erreur lors de la vérification de l'échec et mat : " << e.what();
+        return false;
+    }
+
+    qDebug() << "Échec et mat pour " << ((couleur == Couleur::Blanc) ? "Blanc" : "Noir");
+    return true;
+}
+
+bool Modele::DeplacementManager::estEchecPeutPasBouger(const Couleur &couleur)
+{
+    if (!estEchec(couleur))
+        return false;
+
+    try
+    {
+        for (int i = 0; i < Echiquier::N_CASES; i++)
+        {
+            for (int j = 0; j < Echiquier::N_CASES; j++)
+            {
+                std::shared_ptr<Piece> piece = echiquier_->getCases()[i][j];
+                if (piece != nullptr && piece->couleur() == couleur)
+                {
+                    std::vector<Position> deplacementsPossibles = piece->calculerDeplacementsPossibles(echiquier_->getCases());
+                    for (const auto &pos : deplacementsPossibles)
+                    {
+                        if (!estEchecApresDeplacement(piece->position(), pos))
+                            return false; // au moins un mouvement légal existe
+                    }
+                }
+            }
+        }
+    }
+    catch (const std::runtime_error &e)
+    {
+        qDebug() << "Erreur lors de la vérification (echec peut pas bouger) : " << e.what();
         return false;
     }
 

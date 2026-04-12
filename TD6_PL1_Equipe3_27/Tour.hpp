@@ -38,6 +38,12 @@ namespace Modele
                     throw ExceptionNombreToursNoires();
                 }
             }
+            if(couleur == Couleur::Blanc && (position.x() == 7 && (position.y() == 0 || position.y() == 7)))
+                aBouge_ = false;
+            else if(couleur == Couleur::Noir && (position.x() == 0 && (position.y() == 0 || position.y() == 7)))
+                aBouge_ = false;
+            else
+                aBouge_ = true; // si la tour n'est pas à sa position initiale, elle est considérée comme ayant déjà bougé
         }
 
         char symbole() const override { return 'T'; }
