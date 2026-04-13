@@ -1,4 +1,5 @@
 #include "Pion.hpp"
+#include "../Echiquier.hpp"
 int Modele::Pion::nbPionsBlancs_ = 0;
 int Modele::Pion::nbPionsNoirs_ = 0;
 Modele::Pion::Pion(Position position, Couleur couleur) : Piece(position, couleur)
@@ -22,7 +23,6 @@ Modele::Pion::Pion(Position position, Couleur couleur) : Piece(position, couleur
         }
     }
 }
-
 
 std::vector<Position> Modele::Pion::calculerDeplacementsPossibles(const std::vector<std::vector<std::shared_ptr<Piece>>> &echiquier)
 {
@@ -58,4 +58,11 @@ std::vector<Position> Modele::Pion::calculerDeplacementsPossibles(const std::vec
         }
     }
     return deplacementsPossibles_;
+}
+Modele::Pion::~Pion()
+{
+    if (couleur_ == Couleur::Blanc)
+        nbPionsBlancs_--;
+    else
+        nbPionsNoirs_--;
 }

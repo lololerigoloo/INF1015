@@ -1,6 +1,6 @@
 #pragma once
 #include <QtWidgets>
-#include "Piece.hpp"
+#include "pieces/Piece.hpp"
 // Widget latéral pour la sélection des pièces, de la couleur et du mode (placer/effacer)
 // Attention ce code est tres long et pas forcement clair mais vazzyy c'est pour la bonne cause
 namespace Vue

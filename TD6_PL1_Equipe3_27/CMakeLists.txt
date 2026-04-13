@@ -21,6 +21,8 @@ set(BILIOTHEQUE_COURS
 file(GLOB ALL_FILES
 	*.cpp
 	*.hpp
+	pieces/*.cpp
+	pieces/*.hpp
 	images.qrc 
 	${BILIOTHEQUE_COURS}
 )

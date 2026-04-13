@@ -4,7 +4,7 @@
 #include <memory>
 #include "piecePixmapManager.hpp"
 #include "blocInfomation.hpp"
-#include "Roi.hpp"
+#include "pieces/Roi.hpp"
 namespace Vue
 {
 

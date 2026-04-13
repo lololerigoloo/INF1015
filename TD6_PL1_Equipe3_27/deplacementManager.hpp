@@ -1,7 +1,12 @@
+// ============================================================
+// deplacementManager.hpp — Gestion des déplacements et tours
+// Namespace : Modele
+// ============================================================     
+
 #pragma once
 #include <memory>
 #include "Position.hpp"
-#include "Piece.hpp"
+#include "pieces/Piece.hpp"
 #include "blocInfomation.hpp"
 
 namespace Modele
@@ -26,16 +31,7 @@ namespace Modele
         std::shared_ptr<Piece> getPiecesSelectionnee() const { return piecesSelectionnee_; }
         void gererCaseCliquee(const Position &position);
 
-        Modele::BlocInformation getBlocInformation()
-        {
-            return Modele::BlocInformation{
-                .estTourBlanc = (tour_ == Couleur::Blanc),
-                .estPartieEnCours = true,
-                .estEchec = estEchec(tour_),
-                .estEchecEtMat = estEchecEtMat(tour_),
-                .estEchecPeutPasBouger = estEchecPeutPasBouger(tour_),
-                .tourBlancGagne = false};
-        }
+        Modele::BlocInformation getBlocInformation();
 
     private:
         Echiquier *echiquier_;

@@ -1,21 +1,20 @@
+// ============================================================
+// mainWinUi.hpp — Fenêtre principale de l'application
+// Namespace : Vue
+// ============================================================
 #pragma once
 #include <QMainWindow>
-#include "EchiquierWidget.hpp"
-#include <memory>
-#include "Echiquier.hpp"
-#include <QPixmap>
-#include <QLabel>
-#include "SideWidget.hpp"
-#include <QMouseEvent>
-#include "Piece.hpp"
-#include "Pion.hpp"
-#include "Fou.hpp"
-#include "Roi.hpp"
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QPushButton>
+#include <QDebug>
+#include <memory>
+#include "Echiquier.hpp"         
+#include "EchiquierWidget.hpp"
+#include "SideWidget.hpp"
 #include "annonceWidget.hpp"
 #include "selecteurDeNiveau.hpp"
+#include "piecePixmapManager.hpp"
+    
 namespace Vue
 {
     class MainWinUi : public QMainWindow

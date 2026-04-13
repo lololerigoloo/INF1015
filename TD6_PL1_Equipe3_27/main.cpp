@@ -3,9 +3,9 @@
 #include <QWidget>
 #include <QGridLayout>
 #include "EchiquierWidget.hpp"
-#include "Fou.hpp"
+#include "pieces/Fou.hpp"
 #include "Position.hpp"
-#include "Piece.hpp"
+#include "pieces/Piece.hpp"
 #include "Echiquier.hpp"
 #include <iostream>
 #include <vector>

@@ -1,6 +1,5 @@
 #include "Echiquier.hpp"
-#include <memory>
-#include "Piece.hpp"
+#include "deplacementManager.hpp"
 
 void Modele::Echiquier::ajouterPiece(std::shared_ptr<Piece> piece)
 {
@@ -113,74 +112,104 @@ void Modele::Echiquier::placerNiveau(const QString &niveau)
 
     if (niveau == "Mat du couloir")
     {
-        ajouterPiece(Vue::TypePiece::Roi,  Couleur::Blanc, Position(7, 4));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Blanc, Position(7, 4));
         ajouterPiece(Vue::TypePiece::Tour, Couleur::Blanc, Position(1, 0));
         ajouterPiece(Vue::TypePiece::Tour, Couleur::Blanc, Position(3, 7));
-        ajouterPiece(Vue::TypePiece::Roi,  Couleur::Noir,  Position(0, 4));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Noir, Position(0, 4));
         deplacementManager_->setTour(Couleur::Noir);
     }
     else if (niveau == "Mat de l'escalier")
     {
-        ajouterPiece(Vue::TypePiece::Roi,  Couleur::Blanc, Position(7, 7));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Blanc, Position(7, 7));
         ajouterPiece(Vue::TypePiece::Tour, Couleur::Blanc, Position(4, 0));
         ajouterPiece(Vue::TypePiece::Tour, Couleur::Blanc, Position(5, 1));
-        ajouterPiece(Vue::TypePiece::Roi,  Couleur::Noir,  Position(0, 3));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Noir, Position(0, 3));
         deplacementManager_->setTour(Couleur::Noir);
     }
     else if (niveau == "Mat du berger")
     {
-        ajouterPiece(Vue::TypePiece::Roi,      Couleur::Blanc, Position(7, 4));
-        ajouterPiece(Vue::TypePiece::Reine,    Couleur::Blanc, Position(7, 3));
-        ajouterPiece(Vue::TypePiece::Fou,      Couleur::Blanc, Position(4, 2));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Blanc, Position(7, 4));
+        ajouterPiece(Vue::TypePiece::Reine, Couleur::Blanc, Position(7, 3));
+        ajouterPiece(Vue::TypePiece::Fou, Couleur::Blanc, Position(4, 2));
         ajouterPiece(Vue::TypePiece::Cavalier, Couleur::Blanc, Position(5, 5));
-        ajouterPiece(Vue::TypePiece::Roi,      Couleur::Noir,  Position(0, 4));
-        ajouterPiece(Vue::TypePiece::Cavalier, Couleur::Noir,  Position(2, 2));
-        ajouterPiece(Vue::TypePiece::Cavalier, Couleur::Noir,  Position(2, 5));
-        ajouterPiece(Vue::TypePiece::Pion,     Couleur::Noir,  Position(3, 4));
-        ajouterPiece(Vue::TypePiece::Pion,     Couleur::Noir,  Position(1, 5));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Noir, Position(0, 4));
+        ajouterPiece(Vue::TypePiece::Cavalier, Couleur::Noir, Position(2, 2));
+        ajouterPiece(Vue::TypePiece::Cavalier, Couleur::Noir, Position(2, 5));
+        ajouterPiece(Vue::TypePiece::Pion, Couleur::Noir, Position(3, 4));
+        ajouterPiece(Vue::TypePiece::Pion, Couleur::Noir, Position(1, 5));
         deplacementManager_->setTour(Couleur::Blanc);
     }
     else if (niveau == "Mat de l'épaulette")
     {
-        ajouterPiece(Vue::TypePiece::Roi,   Couleur::Blanc, Position(7, 4));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Blanc, Position(7, 4));
         ajouterPiece(Vue::TypePiece::Reine, Couleur::Blanc, Position(2, 7));
-        ajouterPiece(Vue::TypePiece::Roi,   Couleur::Noir,  Position(0, 4));
-        ajouterPiece(Vue::TypePiece::Tour,  Couleur::Noir,  Position(0, 3));
-        ajouterPiece(Vue::TypePiece::Tour,  Couleur::Noir,  Position(0, 5));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Noir, Position(0, 4));
+        ajouterPiece(Vue::TypePiece::Tour, Couleur::Noir, Position(0, 3));
+        ajouterPiece(Vue::TypePiece::Tour, Couleur::Noir, Position(0, 5));
         deplacementManager_->setTour(Couleur::Blanc);
     }
     else if (niveau == "Mat de Légal")
     {
-        ajouterPiece(Vue::TypePiece::Roi,      Couleur::Blanc, Position(7, 4));
-        ajouterPiece(Vue::TypePiece::Fou,      Couleur::Blanc, Position(1, 5));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Blanc, Position(7, 4));
+        ajouterPiece(Vue::TypePiece::Fou, Couleur::Blanc, Position(1, 5));
         ajouterPiece(Vue::TypePiece::Cavalier, Couleur::Blanc, Position(5, 2));
         ajouterPiece(Vue::TypePiece::Cavalier, Couleur::Blanc, Position(3, 4));
-        ajouterPiece(Vue::TypePiece::Roi,      Couleur::Noir,  Position(1, 4));
-        ajouterPiece(Vue::TypePiece::Cavalier, Couleur::Noir,  Position(2, 2));
-        ajouterPiece(Vue::TypePiece::Fou,      Couleur::Noir,  Position(7, 3));
-        ajouterPiece(Vue::TypePiece::Pion,     Couleur::Noir,  Position(2, 3));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Noir, Position(1, 4));
+        ajouterPiece(Vue::TypePiece::Cavalier, Couleur::Noir, Position(2, 2));
+        ajouterPiece(Vue::TypePiece::Fou, Couleur::Noir, Position(7, 3));
+        ajouterPiece(Vue::TypePiece::Pion, Couleur::Noir, Position(2, 3));
         deplacementManager_->setTour(Couleur::Blanc);
     }
     else if (niveau == "Mat des Arabes")
     {
-        ajouterPiece(Vue::TypePiece::Roi,      Couleur::Blanc, Position(5, 4));
-        ajouterPiece(Vue::TypePiece::Tour,     Couleur::Blanc, Position(2, 0));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Blanc, Position(5, 4));
+        ajouterPiece(Vue::TypePiece::Tour, Couleur::Blanc, Position(2, 0));
         ajouterPiece(Vue::TypePiece::Cavalier, Couleur::Blanc, Position(3, 6));
-        ajouterPiece(Vue::TypePiece::Roi,      Couleur::Noir,  Position(0, 7));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Noir, Position(0, 7));
         deplacementManager_->setTour(Couleur::Blanc);
     }
     else if (niveau == "Finale Tour vs Roi")
     {
-        ajouterPiece(Vue::TypePiece::Roi,  Couleur::Blanc, Position(7, 4));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Blanc, Position(7, 4));
         ajouterPiece(Vue::TypePiece::Tour, Couleur::Blanc, Position(4, 0));
-        ajouterPiece(Vue::TypePiece::Roi,  Couleur::Noir,  Position(0, 4));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Noir, Position(0, 4));
         deplacementManager_->setTour(Couleur::Blanc);
     }
     else if (niveau == "Finale Dame vs Roi")
     {
-        ajouterPiece(Vue::TypePiece::Roi,   Couleur::Blanc, Position(7, 4));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Blanc, Position(7, 4));
         ajouterPiece(Vue::TypePiece::Reine, Couleur::Blanc, Position(4, 3));
-        ajouterPiece(Vue::TypePiece::Roi,   Couleur::Noir,  Position(0, 4));
+        ajouterPiece(Vue::TypePiece::Roi, Couleur::Noir, Position(0, 4));
         deplacementManager_->setTour(Couleur::Blanc);
     }
+}
+
+void Modele::Echiquier::setPiecesSelectionnee(std::shared_ptr<Piece> piece)
+{
+    deplacementManager_->setPiecesSelectionnee(piece);
+}
+
+std::shared_ptr<Modele::Piece> Modele::Echiquier::getPiecesSelectionnee() const
+{
+    return deplacementManager_->getPiecesSelectionnee();
+}
+
+Modele::BlocInformation Modele::Echiquier::getBlocInformation() const
+{
+    return deplacementManager_->getBlocInformation();
+}
+Position Modele::Echiquier::trouverRoi(Couleur couleur) const
+{
+    for (int i = 0; i < N_CASES; i++)
+    {
+        for (int j = 0; j < N_CASES; j++)
+        {
+            auto piece = cases_[i][j];
+            if (piece != nullptr && piece->symbole() == 'R' && piece->couleur() == couleur)
+            {
+                return Position(i, j);
+            }
+        }
+    }
+    throw std::runtime_error("Roi non trouvé sur l'échiquier");
 }

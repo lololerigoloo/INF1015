@@ -70,7 +70,7 @@ Vue::MainWinUi::MainWinUi()
                 selecteurNiveau_.get(), [this]()
                 { selecteurNiveau_->mettreActif(true); });
         connect(selecteurNiveau_.get(), &Vue::SelecteurDeNiveau::niveauSelectionne,
-                sideWidget_.get(), [this](const QString &niveau) // ici le waring est dû au fait que le signal
+                sideWidget_.get(), [this](const QString&) // ici le waring est dû au fait que le signal
                                                                  // niveauSelectionne n'envoie pas de booléen,
                                                                  // mais on sait que ça va forcer la mise à jour,
                                                                  // donc on peut ignorer le warning

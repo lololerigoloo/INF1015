@@ -1,4 +1,5 @@
 #include "Fou.hpp"
+#include "../Echiquier.hpp"
 
 std::vector<Position> Modele::Fou::calculerDeplacementsPossibles(const std::vector<std::vector<std::shared_ptr<Piece>>>& echiquier) {
     deplacementsPossibles_.clear();
@@ -34,3 +35,26 @@ Modele::Fou::~Fou()
 {
     couleur_ == Couleur::Blanc ? nbFousBlancs_-- : nbFousNoirs_--;
 }
+Modele::Fou::Fou(Position position, Couleur couleur) : Piece(position, couleur) 
+        {
+            if(couleur == Couleur::Blanc)
+            {
+                 nbFousBlancs_++;
+                if(nbFousBlancs_ > 2)
+                {
+                    nbFousBlancs_--;
+                    throw ExceptionNombreFousBlancs();
+                }
+            }
+               
+            else
+            {
+
+                nbFousNoirs_++;
+                if(nbFousNoirs_ > 2)
+                {
+                    nbFousNoirs_--;
+                    throw ExceptionNombreFousNoirs();
+                }
+            }
+        }

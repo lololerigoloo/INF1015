@@ -240,3 +240,14 @@ bool Modele::DeplacementManager::estEchecPeutPasBouger(const Couleur &couleur)
 }
 
 Modele::DeplacementManager::~DeplacementManager() {}
+Modele::BlocInformation Modele::DeplacementManager::getBlocInformation()
+{
+    return Modele::BlocInformation{
+                .estTourBlanc = (tour_ == Couleur::Blanc),
+                .estPartieEnCours = true,
+                .estEchec = estEchec(tour_),
+                .estEchecEtMat = estEchecEtMat(tour_),
+                .estEchecPeutPasBouger = estEchecPeutPasBouger(tour_),
+                .tourBlancGagne = false};
+}
+ 

@@ -1,15 +1,15 @@
+// ============================================================
+// annonceWidget.hpp — Widget d'annonce (échec, tour, etc.)
+// Namespace : Vue
+// ============================================================
 #pragma once
 #include <QWidget>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QPushButton>
-#include <QTextEdit>
-#include "Echiquier.hpp"
-#include "deplacementManager.hpp"
-#include "Piece.hpp"
-#include <QDebug>
-#include "Piece.hpp"
+#include <QLabel>
+#include "pieces/Piece.hpp"
 #include "blocInfomation.hpp"
+#include "SideWidget.hpp"
 
 namespace Vue
 {
@@ -38,11 +38,12 @@ namespace Vue
                                                                                                      : typePiece == Vue::TypePiece::Tour  ? "Tour"
                                                                                                      : typePiece == Vue::TypePiece::Reine ? "Reine"
                                                                                                                                           : "Cavalier")
-            .arg(transformerCouleurEnTexte(couleur));
-                label_->setText(texte);
+                                .arg(transformerCouleurEnTexte(couleur));
+            label_->setText(texte);
         }
     signals:
         void EchecEtMat(const Modele::Couleur &gagnant);
+
     private:
         QLabel *label_;
         QLabel *labelTour_;

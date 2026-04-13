@@ -3,7 +3,7 @@
 #include <QString>
 #include <QDebug>
 #include "EchiquierWidget.hpp"
-#include "Piece.hpp"
+#include "pieces/Piece.hpp"
 namespace Vue
 {
 
